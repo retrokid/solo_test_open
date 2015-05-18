@@ -14,6 +14,8 @@
 		0B5CC2D91B09E10500A0FA6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2D81B09E10500A0FA6C /* Images.xcassets */; };
 		0B5CC2DC1B09E10500A0FA6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */; };
 		0B5CC2E81B09E10500A0FA6C /* Solo_Test_OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */; };
+		0B7080011B09E80300CDB456 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7080001B09E80300CDB456 /* SpriteKit.framework */; };
+		0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7080041B09ED2C00CDB456 /* PlayScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		0B5CC2E11B09E10500A0FA6C /* Solo Test OpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo Test OpenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5CC2E61B09E10500A0FA6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Solo_Test_OpenTests.m; sourceTree = "<group>"; };
+		0B7080001B09E80300CDB456 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		0B7080031B09ED2C00CDB456 /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayScene.h; sourceTree = "<group>"; };
+		0B7080041B09ED2C00CDB456 /* PlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7080011B09E80300CDB456 /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +72,7 @@
 				0B5CC2CA1B09E10500A0FA6C /* Solo Test Open */,
 				0B5CC2E41B09E10500A0FA6C /* Solo Test OpenTests */,
 				0B5CC2C91B09E10500A0FA6C /* Products */,
+				0B7080021B09E81300CDB456 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +92,8 @@
 				0B5CC2D01B09E10500A0FA6C /* AppDelegate.m */,
 				0B5CC2D21B09E10500A0FA6C /* ViewController.h */,
 				0B5CC2D31B09E10500A0FA6C /* ViewController.m */,
+				0B7080031B09ED2C00CDB456 /* PlayScene.h */,
+				0B7080041B09ED2C00CDB456 /* PlayScene.m */,
 				0B5CC2D51B09E10500A0FA6C /* Main.storyboard */,
 				0B5CC2D81B09E10500A0FA6C /* Images.xcassets */,
 				0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */,
@@ -117,6 +126,14 @@
 				0B5CC2E61B09E10500A0FA6C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B7080021B09E81300CDB456 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B7080001B09E80300CDB456 /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +238,7 @@
 			files = (
 				0B5CC2D41B09E10500A0FA6C /* ViewController.m in Sources */,
 				0B5CC2D11B09E10500A0FA6C /* AppDelegate.m in Sources */,
+				0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */,
 				0B5CC2CE1B09E10500A0FA6C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +430,7 @@
 				0B5CC2ED1B09E10500A0FA6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B5CC2EE1B09E10500A0FA6C /* Build configuration list for PBXNativeTarget "Solo Test OpenTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +439,7 @@
 				0B5CC2F01B09E10500A0FA6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

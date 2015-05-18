@@ -14,9 +14,21 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    SKView *spriteView=(SKView *)self.view;
+    spriteView.showsDrawCount=YES;
+    spriteView.showsNodeCount=YES;
+    spriteView.showsFPS=YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    PlayScene *playSC=[[PlayScene alloc]initWithSize:self.view.frame.size];
+    SKView *spriteView=(SKView *)self.view;
+    [spriteView presentScene:playSC];
 }
 
 - (void)didReceiveMemoryWarning {
