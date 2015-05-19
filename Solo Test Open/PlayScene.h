@@ -18,6 +18,7 @@
     CGFloat selectedPawnZPosition;
     CGPoint selectedPawnLastPosition;
     NSMutableArray *boardPawnPoints;
+    NSInteger pickupPoint;
 }
 
 -(void)createSceneContents;
