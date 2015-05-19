@@ -36,6 +36,7 @@
     CGPoint selectedPawnLastPosition;
     NSMutableArray *boardPawnPoints;
     NSInteger pickupPoint;
+    NSArray *possibleMovementsList;
 }
 
 -(void)createSceneContents;
