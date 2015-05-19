@@ -33,6 +33,10 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     self.backgroundColor=[SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
+    if(-40<0)
+    {
+        NSLog(@"yes");
+    }
     isPawnTouched=NO;
     isThisMovePossible=NO;
     shouldLocationChange=YES;
@@ -44,7 +48,6 @@ so, it is implemented in a private interface declaration inside of the implement
     }
     boardPawnPoints[16]=@NO;
     //To Access BOOL Values use : [boardPawnPoints[0] boolValue];
-    
     
     
     SKSpriteNode *board=[self createBoardNode];
@@ -80,6 +83,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -89,6 +93,7 @@ so, it is implemented in a private interface declaration inside of the implement
         
             selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
             selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
+            selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
             [selectedPawn setZPosition:500];
             isPawnTouched=YES;
             shouldLocationChange=YES;
@@ -99,6 +104,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -108,14 +114,55 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     isPawnTouched=NO;
     [selectedPawn setZPosition:selectedPawnZPosition];
+    NSInteger positionIndex;
+    positionIndex=[self findDropPoint:selectedPawn.position compareIn:[self boardPawnPointsCoordinates] withX:[self boardMinX] andY:[self boardMinY]];
+
+    NSLog(@"%d",positionIndex);
+    if (positionIndex!=-1 && ![boardPawnPoints[positionIndex] boolValue])
+    {
+        NSArray *possibleBoardPawnPoints=[self boardPawnPointsCoordinates];
+        SKAction *hareketEttir=[SKAction moveTo:[possibleBoardPawnPoints[positionIndex] CGPointValue] duration:0.1];
+        [selectedPawn runAction:hareketEttir completion:^{
+            shouldLocationChange=NO;
+        }];
+    }
+    else
+    {
+        SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+        [selectedPawn runAction:hareketEttir completion:^{
+            shouldLocationChange=NO;
+        }];
+    }
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     isPawnTouched=NO;
     [selectedPawn setZPosition:selectedPawnZPosition];
+    NSInteger positionIndex;
+    positionIndex=[self findDropPoint:selectedPawn.position compareIn:[self boardPawnPointsCoordinates] withX:[self boardMinX] andY:[self boardMinY]];
+    
+    NSLog(@"%d",positionIndex);
+    
+    if (positionIndex!=-1 && ![boardPawnPoints[positionIndex] boolValue])
+    {
+        NSArray *possibleBoardPawnPoints=[self boardPawnPointsCoordinates];
+        SKAction *hareketEttir=[SKAction moveTo:[possibleBoardPawnPoints[positionIndex] CGPointValue] duration:0.1];
+        [selectedPawn runAction:hareketEttir completion:^{
+            shouldLocationChange=NO;
+        }];
+    }
+    else
+    {
+        SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+        [selectedPawn runAction:hareketEttir completion:^{
+            shouldLocationChange=NO;
+        }];
+    }
 }
 
 #pragma mark - Creating Game Assets
@@ -307,14 +354,20 @@ so, it is implemented in a private interface declaration inside of the implement
     return pawnPoints;
 }
 
+//returns boardPawnPoints[index]'s index or -1 if it fails
 -(NSInteger)findDropPoint:(CGPoint)lastPositionWhenTouchEnded compareIn:(NSArray *)boardPawnPointsCoordinates withX:(CGFloat)minX andY:(CGFloat)minY
 {
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
         CGPoint possiblePoint=[[boardPawnPointsCoordinates objectAtIndex:i]CGPointValue];
-        //if((possiblePoint.x-minX > lastPositionWhenTouchEnded.x) && (possiblePoint.x + minX < lastPositionWhenTouchEnded.x) && (possiblePoint.y-minY > lastPositionWhenTouchEnded.y) && ()
+        //NSLog(@"%f > %f ,%f < %f ,%f > %f ,%f < %f",possiblePoint.x-minX,lastPositionWhenTouchEnded.x,possiblePoint.x + minX, lastPositionWhenTouchEnded.x,possiblePoint.y-minY,lastPositionWhenTouchEnded.y,possiblePoint.y+minY,lastPositionWhenTouchEnded.y);
+        if( ((possiblePoint.x-minX)/2) <= lastPositionWhenTouchEnded.x && (possiblePoint.x + minX)/2 >= lastPositionWhenTouchEnded.x && (possiblePoint.y-minY)/2 <= lastPositionWhenTouchEnded.y && (possiblePoint.y+minY)/2 >= lastPositionWhenTouchEnded.y)
+        {
+            NSLog(@"%d",i);
+            return i;
+        }
     }
-    return 0;
+    return -1;
 }
 
 #pragma mark - Update

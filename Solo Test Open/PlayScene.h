@@ -16,6 +16,7 @@
     CGPoint touchLocation;
     SKNode *selectedPawn;
     CGFloat selectedPawnZPosition;
+    CGPoint selectedPawnLastPosition;
     NSMutableArray *boardPawnPoints;
 }
 
