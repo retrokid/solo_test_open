@@ -99,7 +99,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -122,7 +121,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -132,7 +130,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     if(isPawnTouched)
     {
         [selectedPawn setZPosition:selectedPawnZPosition];
@@ -140,7 +137,7 @@ so, it is implemented in a private interface declaration inside of the implement
         NSInteger positionIndex;
         positionIndex=[self findDropPoint:selectedPawn.position compareIn:[self boardPawnPointsCoordinates] withX:[self boardMinX] andY:[self boardMinY]];
         
-        NSLog(@"%ld",(long)positionIndex);
+
         if (positionIndex!=-1 && ![boardPawnPoints[positionIndex] boolValue])
         {
             NSArray *possibleBoardPawnPoints=[self boardPawnPointsCoordinates];
@@ -165,7 +162,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"selectedPawn.position = X:%f Y:%f",selectedPawn.position.x,selectedPawn.position.y);
     if(isPawnTouched)
     {
         [selectedPawn setZPosition:selectedPawnZPosition];
@@ -543,6 +539,11 @@ so, it is implemented in a private interface declaration inside of the implement
     }
     
     return remainingPawns;
+}
+
+-(void)removePawnAtPosition:(CGPoint)position
+{
+    [[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
 }
 
 #pragma mark - Update
