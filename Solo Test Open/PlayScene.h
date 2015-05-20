@@ -24,6 +24,7 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #import <SpriteKit/SpriteKit.h>
+#import "GeoCalc.h"
 
 @interface PlayScene : SKScene
 {
@@ -37,6 +38,8 @@
     NSMutableArray *boardPawnPoints;
     NSInteger pickupPoint;
     NSArray *possibleMovementsList;
+
+    GeoCalc *geoCalculations;
 }
 
 -(void)createSceneContents;

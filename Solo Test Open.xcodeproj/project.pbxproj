@@ -14,6 +14,9 @@
 		0B5CC2D91B09E10500A0FA6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2D81B09E10500A0FA6C /* Images.xcassets */; };
 		0B5CC2DC1B09E10500A0FA6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */; };
 		0B5CC2E81B09E10500A0FA6C /* Solo_Test_OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */; };
+		0B6DBF1E1B0C7A2800237CD5 /* GameAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF1D1B0C7A2800237CD5 /* GameAssets.m */; };
+		0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */; };
+		0B6DBF241B0C7BAF00237CD5 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */; };
 		0B7080011B09E80300CDB456 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7080001B09E80300CDB456 /* SpriteKit.framework */; };
 		0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7080041B09ED2C00CDB456 /* PlayScene.m */; };
 /* End PBXBuildFile section */
@@ -42,6 +45,12 @@
 		0B5CC2E11B09E10500A0FA6C /* Solo Test OpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo Test OpenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5CC2E61B09E10500A0FA6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Solo_Test_OpenTests.m; sourceTree = "<group>"; };
+		0B6DBF1C1B0C7A2800237CD5 /* GameAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAssets.h; sourceTree = "<group>"; };
+		0B6DBF1D1B0C7A2800237CD5 /* GameAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameAssets.m; sourceTree = "<group>"; };
+		0B6DBF1F1B0C7B6500237CD5 /* GeoCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoCalc.h; sourceTree = "<group>"; };
+		0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoCalc.m; sourceTree = "<group>"; };
+		0B6DBF221B0C7BAF00237CD5 /* GameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLogic.h; sourceTree = "<group>"; };
+		0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLogic.m; sourceTree = "<group>"; };
 		0B7080001B09E80300CDB456 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		0B7080031B09ED2C00CDB456 /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayScene.h; sourceTree = "<group>"; };
 		0B7080041B09ED2C00CDB456 /* PlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayScene.m; sourceTree = "<group>"; };
@@ -98,6 +107,12 @@
 				0B5CC2D81B09E10500A0FA6C /* Images.xcassets */,
 				0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */,
 				0B5CC2CB1B09E10500A0FA6C /* Supporting Files */,
+				0B6DBF1C1B0C7A2800237CD5 /* GameAssets.h */,
+				0B6DBF1D1B0C7A2800237CD5 /* GameAssets.m */,
+				0B6DBF1F1B0C7B6500237CD5 /* GeoCalc.h */,
+				0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */,
+				0B6DBF221B0C7BAF00237CD5 /* GameLogic.h */,
+				0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */,
 			);
 			path = "Solo Test Open";
 			sourceTree = "<group>";
@@ -238,8 +253,11 @@
 			files = (
 				0B5CC2D41B09E10500A0FA6C /* ViewController.m in Sources */,
 				0B5CC2D11B09E10500A0FA6C /* AppDelegate.m in Sources */,
+				0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */,
+				0B6DBF1E1B0C7A2800237CD5 /* GameAssets.m in Sources */,
 				0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */,
 				0B5CC2CE1B09E10500A0FA6C /* main.m in Sources */,
+				0B6DBF241B0C7BAF00237CD5 /* GameLogic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

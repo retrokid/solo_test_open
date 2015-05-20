@@ -23,6 +23,13 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+//nslog characters
+//positive ✅
+//negative ⛔️
+//routine info 🔵
+//live info ⚪️
+
 #import "PlayScene.h"
 
 /*
@@ -47,6 +54,8 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)createSceneContents
 {
+    geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
+    
     self.backgroundColor=[SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     if(-40<0)
@@ -116,7 +125,6 @@ so, it is implemented in a private interface declaration inside of the implement
             shouldLocationChange=YES;
         }
     }
-
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
