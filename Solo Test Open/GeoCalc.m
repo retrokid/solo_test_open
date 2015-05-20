@@ -25,10 +25,10 @@
  */
 //nslog characters
 
-//positive ✅
-//negative ⛔️
-//routine info 🔵
-//live info ⚪️
+//positive ✅ TheLogger(@"✅ SUCCESS");
+//negative ⛔️ TheLogger(@"⛔️ FAIL");
+//routine info 🔵 TheLogger(@"🔵 CALLED");
+//value info ⚪️ TheLogger(@"⚪️ output=%f",var);
 
 #import "GeoCalc.h"
 
@@ -187,15 +187,16 @@
 
 -(NSInteger)findDropPointOfSelectedPawn:(CGPoint)lastPositionWhenTouchEnded inCoordinates:(NSArray *)boardPawnPointsCoordinates
 {
-    NSStringFromSelector(_cmd);
     TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
         if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x, lastPositionWhenTouchEnded.y, [self pawnWidth], [self pawnHeight]), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x, [boardPawnPointsCoordinates[i] CGPointValue].y, [self pawnWidth], [self pawnHeight])))
         {
+            TheLogger(@"✅ SUCCESS");
             return i;
         }
     }
+    TheLogger(@"⛔️ FAIL");
     return -1;
 }
 
@@ -203,13 +204,16 @@
 
 -(NSInteger)findPickupPointOfSelectedPawn:(CGPoint)selectedPawnPosition inCoordinates:(NSArray *)boardPawnPointsCoordinates
 {
+    TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
         if([boardPawnPointsCoordinates[i] CGPointValue].x==selectedPawnPosition.x && [boardPawnPointsCoordinates[i] CGPointValue].y==selectedPawnPosition.y)
         {
+            TheLogger(@"✅ SUCCESS");
             return i;
         }
     }
+    TheLogger(@"⛔️ FAIL");
     return -1;
 }
 
