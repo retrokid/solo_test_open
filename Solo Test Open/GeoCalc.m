@@ -32,31 +32,22 @@
 
 #import "GeoCalc.h"
 
+#define TheLogger(s, ...) NSLog(@"<%@> -%@ Line:%d | %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], NSStringFromSelector(_cmd), __LINE__,[NSString stringWithFormat:(s), ##__VA_ARGS__])
+
 @implementation GeoCalc
 
-/*
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-*/
 -(id)initWithSceneFrame:(CGRect)theFrame
 {
-    NSLog(@"🔵 %@ -(id)initWithFrame:(CGRect)theFrame CALLED",NSStringFromClass(self.class));
+    TheLogger(@"🔵 CALLED");
     self = [super init];
     if (self)
     {
         frame=theFrame;
-        NSLog(@"✅ %@ -(id)initWithFrame:(CGRect)theFrame SUCCESS",NSStringFromClass(self.class));
-        NSLog(@"🔵 %@ -(id)initWithFrame:(CGRect)theFrame -- theFrame=%@",NSStringFromClass(self.class),NSStringFromCGRect(frame));
+        TheLogger(@"✅ SUCCESS");
     }
     else
     {
-        NSLog(@"⛔️ %@ -(id)initWithFrame:(CGRect)theFrame FAIL",NSStringFromClass(self.class));
+        TheLogger(@"⛔️ FAIL");
     }
     return self;
 }
@@ -65,21 +56,25 @@
 
 -(CGFloat)hRayWidth
 {
+    TheLogger(@"🔵 CALLED");
     return self.boardMaxWidth;
 }
 
 -(CGFloat)hRayHeight
 {
+    TheLogger(@"🔵 CALLED");
     return ((self.boardMaxWidth/8)/4);
 }
 
 -(CGFloat)vRayWidth
 {
+    TheLogger(@"🔵 CALLED");
     return ((self.boardMaxWidth/8)/4);
 }
 
 -(CGFloat)vRayHeight
 {
+    TheLogger(@"🔵 CALLED");
     return self.boardMaxWidth;
 }
 
@@ -87,21 +82,25 @@
 
 -(CGFloat)boardMaxWidth
 {
+    TheLogger(@"🔵 CALLED");
     return CGRectGetWidth(frame);
 }
 
 -(CGFloat)boardMaxHeight
 {
+    TheLogger(@"🔵 CALLED");
     return CGRectGetWidth(frame);
 }
 
 -(CGFloat)boardMinX
 {
+    TheLogger(@"🔵 CALLED");
     return (CGRectGetWidth(frame)/8);
 }
 
 -(CGFloat)boardMinY
 {
+    TheLogger(@"🔵 CALLED");
     return (CGRectGetWidth(frame)/8);
 }
 
@@ -109,11 +108,13 @@
 
 -(CGFloat)pawnHeight
 {
+    TheLogger(@"🔵 CALLED");
     return self.boardMaxHeight/10;
 }
 
 -(CGFloat)pawnWidth
 {
+    TheLogger(@"🔵 CALLED");
     return self.boardMaxWidth/10;
 }
 
@@ -123,6 +124,7 @@
 
 -(NSArray *)boardPawnPointsCoordinates
 {
+    TheLogger(@"🔵 CALLED");
     CGFloat minX=self.boardMinX;
     CGFloat minY=self.boardMinY;
 
@@ -185,6 +187,8 @@
 
 -(NSInteger)findDropPointOfSelectedPawn:(CGPoint)lastPositionWhenTouchEnded inCoordinates:(NSArray *)boardPawnPointsCoordinates
 {
+    NSStringFromSelector(_cmd);
+    TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
         if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x, lastPositionWhenTouchEnded.y, [self pawnWidth], [self pawnHeight]), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x, [boardPawnPointsCoordinates[i] CGPointValue].y, [self pawnWidth], [self pawnHeight])))
