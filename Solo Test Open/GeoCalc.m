@@ -23,8 +23,8 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-//nslog characters
 
+//TheLogger() legend
 //positive ✅ TheLogger(@"✅ SUCCESS");
 //negative ⛔️ TheLogger(@"⛔️ FAIL");
 //routine info 🔵 TheLogger(@"🔵 CALLED");
@@ -78,6 +78,18 @@
     return self.boardMaxWidth;
 }
 
+-(CGSize)HSize
+{
+    TheLogger(@"🔵 CALLED");
+    return CGSizeMake(self.hRayWidth, self.hRayHeight);
+}
+
+-(CGSize)VSize
+{
+    TheLogger(@"🔵 CALLED");
+    return CGSizeMake(self.vRayWidth, self.vRayHeight);
+}
+
 #pragma mark - Board Dimensions
 
 -(CGFloat)boardMaxWidth
@@ -104,6 +116,12 @@
     return (CGRectGetWidth(frame)/8);
 }
 
+-(CGSize)boardSize
+{
+    TheLogger(@"🔵 CALLED");
+    return CGSizeMake(self.boardMaxWidth, self.boardMaxWidth);
+}
+
 #pragma mark - Pawn Dimensions
 
 -(CGFloat)pawnHeight
@@ -116,6 +134,12 @@
 {
     TheLogger(@"🔵 CALLED");
     return self.boardMaxWidth/10;
+}
+
+-(CGSize)pawnSize
+{
+    TheLogger(@"🔵 CALLED");
+    return CGSizeMake(self.pawnWidth, self.pawnHeight);
 }
 
 #pragma mark - Positioning
