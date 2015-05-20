@@ -38,13 +38,20 @@
 -(CGFloat)vRayWidth;
 -(CGFloat)vRayHeight;
 
+-(CGSize)HSize;
+-(CGSize)VSize;
+
 -(CGFloat)boardMaxWidth;
 -(CGFloat)boardMaxHeight;
 -(CGFloat)boardMinX;
 -(CGFloat)boardMinY;
 
+-(CGSize)boardSize;
+
 -(CGFloat)pawnHeight;
 -(CGFloat)pawnWidth;
+
+-(CGSize)pawnSize;
 
 -(NSArray *)boardPawnPointsCoordinates;
 
