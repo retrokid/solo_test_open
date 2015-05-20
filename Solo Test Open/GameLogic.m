@@ -116,6 +116,19 @@
     return possibleMovementsArray;
 }
 
+-(NSMutableArray *)boardPawnPoints
+{
+    NSMutableArray *boardPawnPoints=[[NSMutableArray alloc]init];
+    for(NSInteger i=0;i<33;i++)
+    {
+        [boardPawnPoints addObject:@YES];
+    }
+    boardPawnPoints[16]=@NO;
+    
+    //To Access BOOL Values use : [boardPawnPoints[0] boolValue];
+    return boardPawnPoints;
+}
+
 -(BOOL)isThereAnyMovementsLeftIn:(NSArray *)pawnPoints compareWith:(NSArray *)possibleMovements
 {
     for(NSInteger i=0;i<[possibleMovements count];i++)

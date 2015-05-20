@@ -27,4 +27,8 @@
 
 @interface GameAssets : SKNode
 
+-(SKSpriteNode *)createBoardNodeFromFrame:(CGRect)theFrame andSize:(CGSize)theSize;
+-(NSMutableDictionary *)createStaticRaysWithHSize:(CGSize)HSize andVSize:(CGSize)VSize andBoardPawnPointsCoordinates:(NSArray *)theBoardPawnPointsCoordinates;
+-(SKSpriteNode *)createPawnWithSize:(CGSize)pawnSize;
+
 @end

@@ -24,6 +24,9 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #import <SpriteKit/SpriteKit.h>
+
+#import "GameAssets.h"
+#import "GameLogic.h"
 #import "GeoCalc.h"
 
 @interface PlayScene : SKScene
@@ -31,20 +34,30 @@
     BOOL isPawnTouched;
     BOOL isThisMovePossible;
     BOOL shouldLocationChange;
+    
     CGPoint touchLocation;
+    
     SKNode *selectedPawn;
     CGFloat selectedPawnZPosition;
     CGPoint selectedPawnLastPosition;
+    
     NSMutableArray *boardPawnPoints;
+    //#ToDo: change name
     NSInteger pickupPoint;
-    NSArray *possibleMovementsList;
+    NSInteger dropPoint;
+    
+    NSArray *possibleMovements;
+    NSArray *boardPawnPointsCoordinates;
 
+    SKSpriteNode *board;
+    NSMutableDictionary *rays;
+    
     GeoCalc *geoCalculations;
+    GameAssets *gameAssets;
+    GameLogic *gameLogic;
 }
 
 -(void)createSceneContents;
--(CGFloat)boardMaxWidth;
--(CGFloat)boardMaxHeight;
--(SKSpriteNode *)createBoardNode;
+-(void)removePawnAtPosition:(CGPoint)position;
 
 @end

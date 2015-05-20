@@ -24,14 +24,14 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//nslog characters
-//positive ✅
-//negative ⛔️
-//routine info 🔵
-//live info ⚪️
+//TheLogger() legend
+//positive ✅ TheLogger(@"✅ SUCCESS");
+//negative ⛔️ TheLogger(@"⛔️ FAIL");
+//routine info 🔵 TheLogger(@"🔵 CALLED");
+//value info ⚪️ TheLogger(@"⚪️ output=%f",var);
 
 #import "ViewController.h"
-
+#define TheLogger(s, ...) NSLog(@"<%@> -%@ Line:%d | %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], NSStringFromSelector(_cmd), __LINE__,[NSString stringWithFormat:(s), ##__VA_ARGS__])
 @interface ViewController ()
 
 @end
