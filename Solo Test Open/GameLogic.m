@@ -37,6 +37,7 @@
 
 -(NSArray *)possibleMovements
 {
+    
     NSArray *possibleMovementsArray=@[@[@1,@2,@3],
                                       @[@1,@4,@9],
                                       @[@2,@5,@10],
@@ -44,7 +45,7 @@
                                       @[@3,@6,@11],
                                       @[@4,@5,@6],
                                       @[@4,@9,@16],
-                                      @[@5,@10,@17],
+                                      @[@4,@9,@16],//eksiltildi
                                       @[@6,@5,@4],
                                       @[@6,@11,@18],
                                       @[@7,@8,@9],
@@ -113,6 +114,7 @@
                                       @[@32,@29,@24],
                                       @[@33,@32,@31],
                                       @[@33,@30,@25]];
+
     return possibleMovementsArray;
 }
 
@@ -145,24 +147,27 @@
     return NO;
 }
 
--(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint in:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
+-(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
 {
     if([[theBoardPawnPoints objectAtIndex:theDropPoint] boolValue])
     {
+        TheLogger(@"⛔️ FAIL");
         return NO;
     }
-    
+    NSLog(@"%@",possibleMovements[0][0]);
     for(NSInteger i=0;i<[possibleMovements count];i++)
     {
         NSArray *movementRule=[possibleMovements objectAtIndex:i];
+        NSLog(@"%@ eadfgadfgw",[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]]);
         if(theSelectedPawn == [[movementRule objectAtIndex:0] integerValue] &&
-           [theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] boolValue]] &&
+           [[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue] &&
            theDropPoint == [[movementRule objectAtIndex:2] integerValue])
         {
+            TheLogger(@"✅ SUCCESS");
             return YES;
         }
     }
-    
+    TheLogger(@"⛔️ FAIL");
     return NO;
 }
 

@@ -31,7 +31,7 @@
 -(NSArray *)possibleMovements;
 -(NSMutableArray *)boardPawnPoints;
 -(BOOL)isThereAnyMovementsLeftIn:(NSArray *)pawnPoints compareWith:(NSArray *)possibleMovements;
--(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint in:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints;
+-(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints;
 -(NSInteger)numberOfRemainingPawnsIn:(NSMutableArray *)theBoardPawnPoints;
 
 @end

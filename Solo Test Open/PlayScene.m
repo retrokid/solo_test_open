@@ -99,6 +99,7 @@ so, it is implemented in a private interface declaration inside of the implement
     }
     
     [self addChild:board];
+    
 }
 
 #pragma mark - Touch Events
@@ -142,7 +143,11 @@ so, it is implemented in a private interface declaration inside of the implement
     
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
 
-        if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue])
+        TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
+        TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+        if (dropPoint!=-1 &&
+            ![boardPawnPoints[dropPoint] boolValue] &&
+            [gameLogic isThisMovePossibleFromPointOf:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints])
         {
             SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
             [selectedPawn runAction:hareketEttir completion:^{
@@ -171,8 +176,11 @@ so, it is implemented in a private interface declaration inside of the implement
         [selectedPawn setScale:1.0];
         
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
-        
-        if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue])
+        TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
+        TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+        if (dropPoint!=-1 &&
+            ![boardPawnPoints[dropPoint] boolValue] &&
+            [gameLogic isThisMovePossibleFromPointOf:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints])
         {
             SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
             [selectedPawn runAction:hareketEttir completion:^{
