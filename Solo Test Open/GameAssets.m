@@ -35,7 +35,7 @@
 
 @implementation GameAssets
 
-//requires boardMaxWidth , boardMaxHeight and scene.frame
+
 -(SKSpriteNode *)createBoardNodeFromFrame:(CGRect)theFrame andSize:(CGSize)theSize
 {
     SKSpriteNode *board=[[SKSpriteNode alloc]initWithColor:[SKColor clearColor] size:theSize];
@@ -43,7 +43,7 @@
     return board;
 }
 
-//requires hRayWidth,hRayHeight ,vRayWidth,vRayHeight and boardPawnPointsCoordinates
+
 -(NSMutableDictionary *)createStaticRaysWithHSize:(CGSize)HSize andVSize:(CGSize)VSize andBoardPawnPointsCoordinates:(NSArray *)theBoardPawnPointsCoordinates
 {
     NSMutableDictionary *rays=[[NSMutableDictionary alloc]init];
