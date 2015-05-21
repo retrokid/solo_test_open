@@ -58,6 +58,8 @@ so, it is implemented in a private interface declaration inside of the implement
     gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
     
+    possibleMovements=[gameLogic possibleMovements];
+    
     self.backgroundColor=[SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
 
