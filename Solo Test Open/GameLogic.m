@@ -33,8 +33,6 @@
 #define TheLogger(s, ...) NSLog(@"<%@> -%@ Line:%d | %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], NSStringFromSelector(_cmd), __LINE__,[NSString stringWithFormat:(s), ##__VA_ARGS__])
 @implementation GameLogic
 
-#pragma mark - Game Logic
-
 -(NSArray *)possibleMovements
 {
     
@@ -132,14 +130,14 @@
     return boardPawnPoints;
 }
 
--(BOOL)isThereAnyMovementsLeftIn:(NSArray *)pawnPoints compareWith:(NSArray *)possibleMovements
+-(BOOL)isThereAnyMovementsLeftIn:(NSMutableArray *)theBoardPawnPoints compareWith:(NSArray *)thePossibleMovements
 {
-    for(NSInteger i=0;i<[possibleMovements count];i++)
+    for(NSInteger i=0;i<[thePossibleMovements count];i++)
     {
-        NSArray *movementRule=possibleMovements[i];
-        if(([[pawnPoints objectAtIndex:[[movementRule objectAtIndex:0] integerValue]] boolValue]) &&
-           ([[pawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue]) &&
-           !([[pawnPoints objectAtIndex:[[movementRule objectAtIndex:2] integerValue]] boolValue]))
+        NSArray *movementRule=thePossibleMovements[i];
+        if(([[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:0] integerValue]] boolValue]) &&
+           ([[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue]) &&
+           !([[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:2] integerValue]] boolValue]))
         {
             return YES;
         }
@@ -205,13 +203,5 @@
     
     return remainingPawns;
 }
-/*
- this stays in the PlayScene
- 
--(void)removePawnAtPosition:(CGPoint)position
-{
-    [[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
-}
-*/
 
 @end

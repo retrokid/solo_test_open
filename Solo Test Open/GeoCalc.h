@@ -43,7 +43,6 @@
     CGFloat pawnHeight;
     CGFloat pawnWidth;
     CGSize pawnSize;
-    
 }
 
 -(id)initWithSceneFrame:(CGRect)theFrame;

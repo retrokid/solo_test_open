@@ -217,7 +217,8 @@
                           [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYPlusThree)]];
     
     //To Access Value Use : CGPoint value=[pawnPoints[0] CGPointValue];
-    NSLog(@"pawnp = %@",pawnPoints);
+
+    
     return pawnPoints;
 }
 

@@ -45,6 +45,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)didMoveToView:(SKView *)view
 {
+    TheLogger(@"🔵 CALLED");
     if(!self.contentCreated)
     {
         [self createSceneContents];
@@ -54,6 +55,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)createSceneContents
 {
+    TheLogger(@"🔵 CALLED");
     gameAssets=[[GameAssets alloc]init];
     gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
@@ -68,14 +70,13 @@ so, it is implemented in a private interface declaration inside of the implement
     shouldLocationChange=YES;
     
     selectedPawn=[[SKSpriteNode alloc]init];
-    
-    //To Access BOOL Values use : [boardPawnPoints[0] boolValue];
     boardPawnPoints=[gameLogic boardPawnPoints];
     
-    board=[gameAssets createBoardNodeFromFrame:self.frame andSize:[geoCalculations boardSize]];
+    //#ToDo geoCalculations make getter setter or @property @@synthesize
+    board=[gameAssets createBoardNodeFromFrame:self.frame andSize:geoCalculations.boardSize];
     [board setName:@"board"];
     
-    rays=[gameAssets createStaticRaysWithHSize:[geoCalculations HSize] andVSize:[geoCalculations VSize] andBoardPawnPointsCoordinates:[geoCalculations boardPawnPointsCoordinates]];
+    rays=[gameAssets createStaticRaysWithHSize:geoCalculations.HSize andVSize:geoCalculations.VSize andBoardPawnPointsCoordinates:geoCalculations.boardPawnPointsCoordinates];
     
     
     [board addChild:[rays objectForKey:@"h1"]];
@@ -91,7 +92,6 @@ so, it is implemented in a private interface declaration inside of the implement
     {
         if(!([boardPawnPointsCoordinates[i] CGPointValue].x==0 && [boardPawnPointsCoordinates[i] CGPointValue].y==0))
         {
-            //ToDo create nodes
             SKSpriteNode *pawn=[gameAssets createPawnWithSize:[geoCalculations pawnSize]];
             [pawn setName:@"pawn"];
             [pawn setPosition:[boardPawnPointsCoordinates[i] CGPointValue]];
@@ -108,27 +108,42 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (UITouch *touch in touches)
+    TheLogger(@"🔵 CALLED");
+    if(!isPawnTouched)
     {
-        touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
-        
-        if([[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].name isEqualToString:@"pawn"])
+        TheLogger(@"no pawn touched yet ✅ SUCCESS");
+        for (UITouch *touch in touches)
         {
-        
-            selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
-            selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
-            selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
-            pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:boardPawnPointsCoordinates];
-            [selectedPawn setZPosition:500];
-            [selectedPawn setScale:2.0];
-            isPawnTouched=YES;
-            shouldLocationChange=YES;
+            touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
+            
+            if([[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].name isEqualToString:@"pawn"])
+            {
+                TheLogger(@"pawn touch ✅ SUCCESS");
+                selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
+                selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
+                selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
+                pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:boardPawnPointsCoordinates];
+                [selectedPawn setZPosition:500];
+                [selectedPawn setScale:2.0];
+                isPawnTouched=YES;
+                shouldLocationChange=YES;
+            }
+            else
+            {
+                TheLogger(@"pawn touch ⛔️ FAIL");
+            }
         }
     }
+    else
+    {
+        TheLogger(@"a pawn is already touched ⛔️ FAIL");
+    }
+    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    TheLogger(@"🔵 CALLED");
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -138,6 +153,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    TheLogger(@"🔵 CALLED");
     if(isPawnTouched)
     {
         [selectedPawn setZPosition:selectedPawnZPosition];
@@ -146,12 +162,12 @@ so, it is implemented in a private interface declaration inside of the implement
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
         if (dropPoint!=-1)
         {
+            TheLogger(@"pawn point is empty ✅ SUCCESS");
             removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
-            
-
             
             if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
+                TheLogger(@"move is possible ✅ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
@@ -159,6 +175,14 @@ so, it is implemented in a private interface declaration inside of the implement
                     boardPawnPoints[pickupPoint]=@NO;
                     boardPawnPoints[removePoint]=@NO;
                     boardPawnPoints[dropPoint]=@YES;
+                    if(![gameLogic isThereAnyMovementsLeftIn:boardPawnPoints compareWith:possibleMovements])
+                    {
+                        TheLogger(@"no more moves ⛔️ SUCCESS");
+                    }
+                    else
+                    {
+                        TheLogger(@"there are more moves ✅ SUCCESS");
+                    }
                 }];
             }
             else

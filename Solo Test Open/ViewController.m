@@ -40,6 +40,7 @@
 
 - (void)viewDidLoad
 {
+    TheLogger(@"🔵 CALLED");
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     SKView *spriteView=(SKView *)self.view;
@@ -50,12 +51,14 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    TheLogger(@"🔵 CALLED");
     PlayScene *playSC=[[PlayScene alloc]initWithSize:self.view.frame.size];
     SKView *spriteView=(SKView *)self.view;
     [spriteView presentScene:playSC];
 }
 
 - (void)didReceiveMemoryWarning {
+    TheLogger(@"🔵 CALLED");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
