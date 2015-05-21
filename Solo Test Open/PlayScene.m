@@ -142,21 +142,34 @@ so, it is implemented in a private interface declaration inside of the implement
     {
         [selectedPawn setZPosition:selectedPawnZPosition];
         [selectedPawn setScale:1.0];
-    
+        
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
-
-        TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
-        TheLogger(@"⚪️ dropPoint=%d",dropPoint);
-        if (dropPoint!=-1 &&
-            ![boardPawnPoints[dropPoint] boolValue] &&
-            [gameLogic isThisMovePossibleFromPointOf:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints])
+        if (dropPoint!=-1)
         {
-            SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
-            [selectedPawn runAction:hareketEttir completion:^{
-                shouldLocationChange=NO;
-                boardPawnPoints[pickupPoint]=@NO;
-                boardPawnPoints[dropPoint]=@YES;
-            }];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
+            
+            TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
+            TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+            
+            if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
+            {
+                SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                    [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
+                    boardPawnPoints[pickupPoint]=@NO;
+                    boardPawnPoints[removePoint]=@NO;
+                    boardPawnPoints[dropPoint]=@YES;
+                }];
+            }
+            else
+            {
+                SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                }];
+            }
+            
         }
         else
         {
@@ -178,18 +191,32 @@ so, it is implemented in a private interface declaration inside of the implement
         [selectedPawn setScale:1.0];
         
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
-        TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
-        TheLogger(@"⚪️ dropPoint=%d",dropPoint);
-        if (dropPoint!=-1 &&
-            ![boardPawnPoints[dropPoint] boolValue] &&
-            [gameLogic isThisMovePossibleFromPointOf:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints])
+        if (dropPoint!=-1)
         {
-            SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
-            [selectedPawn runAction:hareketEttir completion:^{
-                shouldLocationChange=NO;
-                boardPawnPoints[pickupPoint]=@NO;
-                boardPawnPoints[dropPoint]=@YES;
-            }];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
+            
+            TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
+            TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+            
+            if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
+            {
+                SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                    [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
+                    boardPawnPoints[pickupPoint]=@NO;
+                    boardPawnPoints[removePoint]=@NO;
+                    boardPawnPoints[dropPoint]=@YES;
+                }];
+            }
+            else
+            {
+                SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                }];
+            }
+            
         }
         else
         {

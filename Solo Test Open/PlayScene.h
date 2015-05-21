@@ -45,6 +45,7 @@
     //#ToDo: change name
     NSInteger pickupPoint;
     NSInteger dropPoint;
+    NSInteger removePoint;
     
     NSArray *possibleMovements;
     NSArray *boardPawnPointsCoordinates;

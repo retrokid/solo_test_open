@@ -168,10 +168,10 @@
     CGFloat originYPlusTwo=0+(2*minY);
     CGFloat originYPlusThree=0+(3*minY);
     
-    NSArray *pawnPoints=@[[NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYMinusThree)],
-                          [NSValue valueWithCGPoint:CGPointMake(0, originYMinusThree)],
-                          [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYMinusThree)],
-                          [NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYMinusTwo)],
+    NSArray *pawnPoints=@[[NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYMinusThree)],//0
+                          [NSValue valueWithCGPoint:CGPointMake(0, originYMinusThree)],//1
+                          [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYMinusThree)],//2
+                          [NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYMinusTwo)],//3
                           [NSValue valueWithCGPoint:CGPointMake(0, originYMinusTwo)],
                           [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYMinusTwo)],
                           [NSValue valueWithCGPoint:CGPointMake(originXMinusThree, originYMinusOne)],
@@ -198,12 +198,12 @@
                           [NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYPlusTwo)],
                           [NSValue valueWithCGPoint:CGPointMake(0, originYPlusTwo)],
                           [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYPlusTwo)],
-                          [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYPlusThree)],
+                          [NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYPlusThree)],
                           [NSValue valueWithCGPoint:CGPointMake(0, originYPlusThree)],
-                          [NSValue valueWithCGPoint:CGPointMake(originXMinusOne, originYPlusThree)]];
+                          [NSValue valueWithCGPoint:CGPointMake(originXPlusOne, originYPlusThree)]];
     
     //To Access Value Use : CGPoint value=[pawnPoints[0] CGPointValue];
-    
+    NSLog(@"pawnp = %@",pawnPoints);
     return pawnPoints;
 }
 

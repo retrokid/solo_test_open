@@ -38,82 +38,83 @@
 -(NSArray *)possibleMovements
 {
     
-    NSArray *possibleMovementsArray=@[@[@1,@2,@3],
-                                      @[@1,@4,@9],
-                                      @[@2,@5,@10],
-                                      @[@3,@7,@1],
-                                      @[@3,@6,@11],
-                                      @[@4,@5,@6],
+    NSArray *possibleMovementsArray=@[@[@0,@1,@2],//
+                                      @[@0,@3,@8],//
+                                      @[@1,@4,@9],//
+                                      @[@2,@1,@0],//
+                                      @[@2,@5,@10],//
+                                      @[@3,@4,@5],//
+                                      @[@3,@8,@15],
                                       @[@4,@9,@16],
-                                      @[@4,@9,@16],//eksiltildi
-                                      @[@6,@5,@4],
-                                      @[@6,@11,@18],
-                                      @[@7,@8,@9],
-                                      @[@7,@14,@21],
+                                      @[@5,@4,@3],
+                                      @[@5,@10,@17],
+                                      @[@6,@7,@8],
+                                      @[@6,@13,@20],//
+                                      @[@7,@8,@9],//
+                                      @[@7,@14,@21],//
+                                      @[@8,@3,@0],//
+                                      @[@8,@7,@6],//
+                                      @[@8,@15,@22],//
                                       @[@8,@9,@10],
-                                      @[@8,@15,@22],
+                                      @[@9,@16,@23],
                                       @[@9,@4,@1],
                                       @[@9,@8,@7],
-                                      @[@9,@16,@23],
-                                      @[@9,@10,@11],
-                                      @[@10,@17,@24],
-                                      @[@10,@5,@2],
+                                      @[@9,@10,@11],//
+                                      @[@10,@5,@2],//
                                       @[@10,@9,@8],
                                       @[@10,@11,@12],
-                                      @[@11,@6,@3],
-                                      @[@11,@10,@9],
-                                      @[@11,@12,@13],
+                                      @[@10,@17,@24],//
+                                      @[@11,@10,@9],//
                                       @[@11,@18,@25],
                                       @[@12,@11,@10],
-                                      @[@12,@19,@26],
-                                      @[@13,@12,@11],
-                                      @[@13,@20,@27],
-                                      @[@14,@15,@16],
+                                      @[@12,@19,@26],//
+                                      @[@13,@14,@15],//
+                                      @[@14,@15,@16],//
+                                      @[@15,@14,@13],
+                                      @[@15,@8,@3],
                                       @[@15,@16,@17],
+                                      @[@15,@22,@27],
                                       @[@16,@15,@14],
-                                      @[@16,@9,@4],
+                                      @[@16,@9,@4],//
                                       @[@16,@17,@18],
-                                      @[@16,@23,@28],
+                                      @[@16,@23,@28],//
                                       @[@17,@16,@15],
                                       @[@17,@10,@5],
                                       @[@17,@18,@19],
                                       @[@17,@24,@29],
                                       @[@18,@17,@16],
-                                      @[@18,@11,@6],
-                                      @[@18,@19,@20],
-                                      @[@18,@25,@30],
                                       @[@19,@18,@17],
-                                      @[@20,@19,@18],
+                                      @[@20,@13,@6],
+                                      @[@20,@21,@22],
                                       @[@21,@14,@7],
                                       @[@21,@22,@23],
+                                      @[@22,@21,@20],
                                       @[@22,@15,@8],
                                       @[@22,@23,@24],
-                                      @[@23,@22,@21],
+                                      @[@22,@27,@30],
+                                      @[@23,@22,@21],//
                                       @[@23,@16,@9],
-                                      @[@23,@24,@25],
                                       @[@23,@28,@31],
+                                      @[@23,@24,@25],
                                       @[@24,@23,@22],
                                       @[@24,@17,@10],
-                                      @[@24,@29,@32],
                                       @[@24,@25,@26],
-                                      @[@25,@24,@23],
+                                      @[@24,@29,@32],//
                                       @[@25,@18,@11],
-                                      @[@25,@26,@27],
-                                      @[@25,@30,@33],
+                                      @[@25,@24,@23],
                                       @[@26,@19,@12],
                                       @[@26,@25,@24],
-                                      @[@27,@20,@13],
-                                      @[@27,@26,@25],
+                                      @[@26,@21,@14],
+                                      @[@27,@28,@29],
+                                      @[@27,@22,@15],
                                       @[@28,@23,@16],
-                                      @[@28,@29,@30],
+                                      @[@29,@28,@27],
                                       @[@29,@24,@17],
-                                      @[@30,@29,@28],
-                                      @[@30,@25,@18],
+                                      @[@30,@27,@22],//
+                                      @[@30,@31,@32],
                                       @[@31,@28,@23],
-                                      @[@31,@32,@33],
-                                      @[@32,@29,@24],
-                                      @[@33,@32,@31],
-                                      @[@33,@30,@25]];
+                                      @[@32,@31,@30],
+                                      @[@32,@29,@24]];
 
     return possibleMovementsArray;
 }
@@ -154,11 +155,9 @@
         TheLogger(@"⛔️ FAIL");
         return NO;
     }
-    NSLog(@"%@",possibleMovements[0][0]);
     for(NSInteger i=0;i<[possibleMovements count];i++)
     {
         NSArray *movementRule=[possibleMovements objectAtIndex:i];
-        NSLog(@"%@ eadfgadfgw",[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]]);
         if(theSelectedPawn == [[movementRule objectAtIndex:0] integerValue] &&
            [[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue] &&
            theDropPoint == [[movementRule objectAtIndex:2] integerValue])
@@ -169,6 +168,28 @@
     }
     TheLogger(@"⛔️ FAIL");
     return NO;
+}
+
+-(NSInteger)findRemovePointOfPawn:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
+{
+    if([[theBoardPawnPoints objectAtIndex:theDropPoint] boolValue])
+    {
+        TheLogger(@"⛔️ FAIL");
+        return -1;
+    }
+    for(NSInteger i=0;i<[possibleMovements count];i++)
+    {
+        NSArray *movementRule=[possibleMovements objectAtIndex:i];
+        if(theSelectedPawn == [[movementRule objectAtIndex:0] integerValue] &&
+           [[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue] &&
+           theDropPoint == [[movementRule objectAtIndex:2] integerValue])
+        {
+            TheLogger(@"✅ SUCCESS");
+            return [[movementRule objectAtIndex:1] integerValue];
+        }
+    }
+    TheLogger(@"⛔️ FAIL");
+    return -1;
 }
 
 -(NSInteger)numberOfRemainingPawnsIn:(NSMutableArray *)theBoardPawnPoints
