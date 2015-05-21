@@ -1,4 +1,4 @@
 # Solo-Test-Open
-SpriteKit Test Project
-Just started to write this project so it's not working and the code is a mess right now.
-So don't bother to download ;)
+A SpriteKit Game Project
+iOS 8.2
+It's working but there might be some bugs.

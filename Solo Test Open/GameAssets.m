@@ -23,7 +23,7 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-//TheLogger() legend
+//TheLogger() marks
 //positive ✅ TheLogger(@"✅ SUCCESS");
 //negative ⛔️ TheLogger(@"⛔️ FAIL");
 //routine info 🔵 TheLogger(@"🔵 CALLED");
@@ -38,6 +38,7 @@
 
 -(SKSpriteNode *)createBoardNodeFromFrame:(CGRect)theFrame andSize:(CGSize)theSize
 {
+    TheLogger(@"🔵 CALLED");
     SKSpriteNode *board=[[SKSpriteNode alloc]initWithColor:[SKColor clearColor] size:theSize];
     [board setPosition:CGPointMake(CGRectGetMidX(theFrame), CGRectGetMidY(theFrame))];
     return board;
@@ -46,6 +47,7 @@
 
 -(NSMutableDictionary *)createStaticRaysWithHSize:(CGSize)HSize andVSize:(CGSize)VSize andBoardPawnPointsCoordinates:(NSArray *)theBoardPawnPointsCoordinates
 {
+    TheLogger(@"🔵 CALLED");
     NSMutableDictionary *rays=[[NSMutableDictionary alloc]init];
     CGPoint rayPosition;
     
@@ -105,6 +107,7 @@
 
 -(SKSpriteNode *)createPawnWithSize:(CGSize)pawnSize
 {
+    TheLogger(@"🔵 CALLED");
     SKSpriteNode *pawn=[[SKSpriteNode alloc]initWithTexture:[SKTexture textureWithImageNamed:@"siyahPiyon"] color:[SKColor clearColor] size:pawnSize];
     return pawn;
 }

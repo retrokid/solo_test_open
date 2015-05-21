@@ -24,7 +24,7 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//TheLogger() legend
+//TheLogger() marks
 //positive ✅ TheLogger(@"✅ SUCCESS");
 //negative ⛔️ TheLogger(@"⛔️ FAIL");
 //routine info 🔵 TheLogger(@"🔵 CALLED");

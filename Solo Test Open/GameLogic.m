@@ -23,7 +23,7 @@
  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-//TheLogger() legend
+//TheLogger() marks
 //positive ✅ TheLogger(@"✅ SUCCESS");
 //negative ⛔️ TheLogger(@"⛔️ FAIL");
 //routine info 🔵 TheLogger(@"🔵 CALLED");
@@ -35,7 +35,7 @@
 
 -(NSArray *)possibleMovements
 {
-    
+    TheLogger(@"🔵 CALLED");
     NSArray *possibleMovementsArray=@[@[@0,@1,@2],//
                                       @[@0,@3,@8],//
                                       @[@1,@4,@9],//
@@ -119,6 +119,7 @@
 
 -(NSMutableArray *)boardPawnPoints
 {
+    TheLogger(@"🔵 CALLED");
     NSMutableArray *boardPawnPoints=[[NSMutableArray alloc]init];
     for(NSInteger i=0;i<33;i++)
     {
@@ -126,12 +127,12 @@
     }
     boardPawnPoints[16]=@NO;
     
-    //To Access BOOL Values use : [boardPawnPoints[0] boolValue];
     return boardPawnPoints;
 }
 
 -(BOOL)isThereAnyMovementsLeftIn:(NSMutableArray *)theBoardPawnPoints compareWith:(NSArray *)thePossibleMovements
 {
+    TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[thePossibleMovements count];i++)
     {
         NSArray *movementRule=thePossibleMovements[i];
@@ -139,15 +140,17 @@
            ([[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:1] integerValue]] boolValue]) &&
            !([[theBoardPawnPoints objectAtIndex:[[movementRule objectAtIndex:2] integerValue]] boolValue]))
         {
+            TheLogger(@"✅ SUCCESS");
             return YES;
         }
     }
-    
+    TheLogger(@"⛔️ FAIL");
     return NO;
 }
 
 -(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
 {
+    TheLogger(@"🔵 CALLED");
     if([[theBoardPawnPoints objectAtIndex:theDropPoint] boolValue])
     {
         TheLogger(@"⛔️ FAIL");
@@ -170,6 +173,7 @@
 
 -(NSInteger)findRemovePointOfPawn:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
 {
+    TheLogger(@"🔵 CALLED");
     if([[theBoardPawnPoints objectAtIndex:theDropPoint] boolValue])
     {
         TheLogger(@"⛔️ FAIL");
@@ -192,6 +196,7 @@
 
 -(NSInteger)numberOfRemainingPawnsIn:(NSMutableArray *)theBoardPawnPoints
 {
+    TheLogger(@"🔵 CALLED");
     NSUInteger remainingPawns=0;
     for (id isExists in theBoardPawnPoints)
     {
@@ -200,7 +205,7 @@
             remainingPawns++;
         }
     }
-    
+    TheLogger(@"⚪️ number of remaining pawns=%d",remainingPawns);
     return remainingPawns;
 }
 
