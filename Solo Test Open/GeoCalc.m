@@ -43,6 +43,20 @@
     if (self)
     {
         frame=theFrame;
+        hRayWidth=[self hRayWidth];
+        hRayHeight=[self hRayHeight];
+        vRayWidth=[self vRayWidth];
+        vRayHeight=[self vRayHeight];
+        HSize=[self HSize];
+        VSize=[self VSize];
+        boardMaxWidth=[self boardMaxWidth];
+        boardMaxHeight=[self boardMaxHeight];
+        boardMinX=[self boardMinX];
+        boardMinY=[self boardMinY];
+        boardSize=[self boardSize];
+        pawnHeight=[self pawnHeight];
+        pawnWidth=[self pawnWidth];
+        pawnSize=[self pawnSize];
         TheLogger(@"✅ SUCCESS");
     }
     else
@@ -214,7 +228,7 @@
     TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
-        if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x, lastPositionWhenTouchEnded.y, [self pawnWidth], [self pawnHeight]), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x, [boardPawnPointsCoordinates[i] CGPointValue].y, [self pawnWidth], [self pawnHeight])))
+        if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x, lastPositionWhenTouchEnded.y, pawnWidth, pawnHeight), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x, [boardPawnPointsCoordinates[i] CGPointValue].y, pawnWidth, pawnHeight)))
         {
             TheLogger(@"✅ SUCCESS");
             return i;

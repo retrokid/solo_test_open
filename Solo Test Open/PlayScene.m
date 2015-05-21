@@ -120,7 +120,7 @@ so, it is implemented in a private interface declaration inside of the implement
             selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
             pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:boardPawnPointsCoordinates];
             [selectedPawn setZPosition:500];
-            [selectedPawn setScale:3.0];
+            [selectedPawn setScale:2.0];
             isPawnTouched=YES;
             shouldLocationChange=YES;
         }
@@ -148,8 +148,7 @@ so, it is implemented in a private interface declaration inside of the implement
         {
             removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
             
-            TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
-            TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+
             
             if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
@@ -195,8 +194,7 @@ so, it is implemented in a private interface declaration inside of the implement
         {
             removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
             
-            TheLogger(@"⚪️ pickupPoint=%d",pickupPoint);
-            TheLogger(@"⚪️ dropPoint=%d",dropPoint);
+        
             
             if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {

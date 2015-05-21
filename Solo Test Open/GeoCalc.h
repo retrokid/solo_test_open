@@ -29,6 +29,21 @@
 @interface GeoCalc : NSObject
 {
     CGRect frame;
+    CGFloat hRayWidth;
+    CGFloat hRayHeight;
+    CGFloat vRayWidth;
+    CGFloat vRayHeight;
+    CGSize HSize;
+    CGSize VSize;
+    CGFloat boardMaxWidth;
+    CGFloat boardMaxHeight;
+    CGFloat boardMinX;
+    CGFloat boardMinY;
+    CGSize boardSize;
+    CGFloat pawnHeight;
+    CGFloat pawnWidth;
+    CGSize pawnSize;
+    
 }
 
 -(id)initWithSceneFrame:(CGRect)theFrame;
