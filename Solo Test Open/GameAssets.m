@@ -78,6 +78,7 @@
                          initWithTexture:[SKTexture textureWithImageNamed:@"siyahLazerV"]
                          color:[SKColor clearColor]
                          size:VSize];
+    [rayV1 setName:@"rayv1"];
     rayPosition=[[theBoardPawnPointsCoordinates objectAtIndex:15]CGPointValue];
     [rayV1 setPosition:rayPosition];
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B42F3C81B0F568900EF839D /* TweensAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B42F3C71B0F568900EF839D /* TweensAnimations.m */; };
 		0B5CC2CE1B09E10500A0FA6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2CD1B09E10500A0FA6C /* main.m */; };
 		0B5CC2D11B09E10500A0FA6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2D01B09E10500A0FA6C /* AppDelegate.m */; };
 		0B5CC2D41B09E10500A0FA6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2D31B09E10500A0FA6C /* ViewController.m */; };
@@ -32,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B42F3C61B0F568900EF839D /* TweensAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweensAnimations.h; sourceTree = "<group>"; };
+		0B42F3C71B0F568900EF839D /* TweensAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweensAnimations.m; sourceTree = "<group>"; };
 		0B5CC2C81B09E10500A0FA6C /* Solo Test Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solo Test Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5CC2CC1B09E10500A0FA6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B5CC2CD1B09E10500A0FA6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */,
 				0B6DBF221B0C7BAF00237CD5 /* GameLogic.h */,
 				0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */,
+				0B42F3C61B0F568900EF839D /* TweensAnimations.h */,
+				0B42F3C71B0F568900EF839D /* TweensAnimations.m */,
 			);
 			path = "Solo Test Open";
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				0B6DBF1E1B0C7A2800237CD5 /* GameAssets.m in Sources */,
 				0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */,
 				0B5CC2CE1B09E10500A0FA6C /* main.m in Sources */,
+				0B42F3C81B0F568900EF839D /* TweensAnimations.m in Sources */,
 				0B6DBF241B0C7BAF00237CD5 /* GameLogic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

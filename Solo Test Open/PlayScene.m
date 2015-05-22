@@ -78,6 +78,43 @@ so, it is implemented in a private interface declaration inside of the implement
     
     rays=[gameAssets createStaticRaysWithHSize:geoCalculations.HSize andVSize:geoCalculations.VSize andBoardPawnPointsCoordinates:geoCalculations.boardPawnPointsCoordinates];
     
+    CGFloat startupH1XPosition;
+    CGFloat startupH1YPosition;
+    CGFloat startupH2XPosition;
+    CGFloat startupH2YPosition;
+    CGFloat startupH3XPosition;
+    CGFloat startupH3YPosition;
+    
+    CGFloat startupV1XPosition;
+    CGFloat startupV1YPosition;
+    CGFloat startupV2XPosition;
+    CGFloat startupV2YPosition;
+    CGFloat startupV3XPosition;
+    CGFloat startupV3YPosition;
+    
+    startupH1XPosition=[[rays objectForKey:@"h1"]position].x-[self frame].size.width;
+    startupH1YPosition=[[rays objectForKey:@"h1"]position].y;
+    [[rays objectForKey:@"h1"] setPosition:CGPointMake(startupH1XPosition, startupH1YPosition)];
+    
+    startupH2XPosition=[[rays objectForKey:@"h2"]position].x+[self frame].size.width;
+    startupH2YPosition=[[rays objectForKey:@"h2"]position].y;
+    [[rays objectForKey:@"h2"] setPosition:CGPointMake(startupH2XPosition, startupH2YPosition)];
+    
+    startupH3XPosition=[[rays objectForKey:@"h3"]position].x-[self frame].size.width;
+    startupH3YPosition=[[rays objectForKey:@"h3"]position].y;
+    [[rays objectForKey:@"h3"] setPosition:CGPointMake(startupH3XPosition, startupH3YPosition)];
+    
+    startupV1XPosition=[[rays objectForKey:@"v1"]position].x;
+    startupV1YPosition=[[rays objectForKey:@"v1"]position].y-[self frame].size.height;
+    [[rays objectForKey:@"v1"] setPosition:CGPointMake(startupV1XPosition, startupV1YPosition)];
+    
+    startupV2XPosition=[[rays objectForKey:@"v2"]position].x;
+    startupV2YPosition=[[rays objectForKey:@"v2"]position].y+[self frame].size.height;
+    [[rays objectForKey:@"v2"] setPosition:CGPointMake(startupV2XPosition, startupV2YPosition)];
+    
+    startupV3XPosition=[[rays objectForKey:@"v3"]position].x;
+    startupV3YPosition=[[rays objectForKey:@"v3"]position].y-[self frame].size.height;
+    [[rays objectForKey:@"v3"] setPosition:CGPointMake(startupV3XPosition, startupV3YPosition)];
     
     [board addChild:[rays objectForKey:@"h1"]];
     [board addChild:[rays objectForKey:@"h2"]];
@@ -100,18 +137,37 @@ so, it is implemented in a private interface declaration inside of the implement
         
     }
     
+    [self addChild:board];
     
+    SKLabelNode *resetButton=[[SKLabelNode alloc]init];
+    [resetButton setText:@"RESET"];
+    [resetButton setColor:[SKColor redColor]];
+    [resetButton setPosition:CGPointMake(CGRectGetMaxX([self frame])-resetButton.frame.size.width, CGRectGetMaxY([self frame])-resetButton.frame.size.height*2)];
+    [resetButton setName:@"reset"];
+    [self addChild:resetButton];
     
+    [[rays objectForKey:@"h1"] runAction:[SKAction moveTo:CGPointMake(startupH1XPosition+[self frame].size.width, startupH1YPosition) duration:0.7]];
+    [[rays objectForKey:@"h2"] runAction:[SKAction moveTo:CGPointMake(startupH2XPosition-[self frame].size.width, startupH2YPosition) duration:0.7]];
+    [[rays objectForKey:@"h3"] runAction:[SKAction moveTo:CGPointMake(startupH3XPosition+[self frame].size.width, startupH3YPosition) duration:0.7]];
     
-     [self addChild:board];
-        TheLogger(@"⚪️ pawnWidth=%f , pawnHeight=%f",[geoCalculations pawnWidth],[geoCalculations pawnHeight]);
-    
+    [[rays objectForKey:@"v1"] runAction:[SKAction moveTo:CGPointMake(startupV1XPosition, startupV1YPosition+[self frame].size.height) duration:0.7]];
+    [[rays objectForKey:@"v2"] runAction:[SKAction moveTo:CGPointMake(startupV2XPosition, startupV2YPosition-[self frame].size.height) duration:0.7]];
+    [[rays objectForKey:@"v3"] runAction:[SKAction moveTo:CGPointMake(startupV3XPosition, startupV3YPosition+[self frame].size.height) duration:0.7]];
 }
 
 #pragma mark - Touch Events
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    for (UITouch *touch in touches)
+    {
+        if([[self nodeAtPoint:[touch locationInNode:self]].name isEqualToString:@"reset"])
+        {
+            [self resetScene];
+            
+        }
+        
+    }
     TheLogger(@"🔵 CALLED");
     if(!isPawnTouched)
     {
@@ -271,6 +327,15 @@ so, it is implemented in a private interface declaration inside of the implement
     isPawnTouched=NO;
 }
 
+#pragma mark - SKActions
+
+-(SKAction *)vRayStartup:(SKSpriteNode *)aVRay
+{
+    
+    return [SKAction moveToY:aVRay.position.y duration:2];
+}
+
+
 #pragma mark - Scene Actions
 
 -(void)removePawnAtPosition:(CGPoint)position
@@ -278,6 +343,13 @@ so, it is implemented in a private interface declaration inside of the implement
     TheLogger(@"🔵 CALLED");
     TheLogger(@"a pawn will remove ✅ SUCCESS");
     [[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
+}
+
+-(void)resetScene
+{
+    [self removeAllActions];
+    [self removeAllChildren];
+    [self createSceneContents];
 }
 
 #pragma mark - Update
