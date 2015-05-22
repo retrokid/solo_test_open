@@ -72,7 +72,8 @@ so, it is implemented in a private interface declaration inside of the implement
     selectedPawn=[[SKSpriteNode alloc]init];
     boardPawnPoints=[gameLogic boardPawnPoints];
     
-    //#ToDo geoCalculations make getter setter or @property @@synthesize
+#warning ToDo geoCalculations make getter setter or @property @@synthesize
+
     board=[gameAssets createBoardNodeFromFrame:self.frame andSize:geoCalculations.boardSize];
     [board setName:@"board"];
     
@@ -124,6 +125,8 @@ so, it is implemented in a private interface declaration inside of the implement
     [board addChild:[rays objectForKey:@"v3"]];
     
     boardPawnPointsCoordinates=[geoCalculations boardPawnPointsCoordinates];
+    
+    #warning ToDo: create nsmutabledictionary for pawns and make animations!!
     
     for (NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
