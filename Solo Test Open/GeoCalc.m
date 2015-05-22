@@ -229,7 +229,9 @@
     TheLogger(@"🔵 CALLED");
     for(NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
-        if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x, lastPositionWhenTouchEnded.y, pawnWidth, pawnHeight), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x, [boardPawnPointsCoordinates[i] CGPointValue].y, pawnWidth, pawnHeight)))
+
+
+        if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x+(pawnWidth/2), lastPositionWhenTouchEnded.y+(pawnHeight/2), pawnWidth, pawnHeight), CGRectMake([boardPawnPointsCoordinates[i] CGPointValue].x-pawnWidth, [boardPawnPointsCoordinates[i] CGPointValue].y-pawnHeight, (pawnWidth*2), (pawnHeight*2))))
         {
             TheLogger(@"✅ SUCCESS");
             return i;

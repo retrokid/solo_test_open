@@ -100,7 +100,11 @@ so, it is implemented in a private interface declaration inside of the implement
         
     }
     
-    [self addChild:board];
+    
+    
+    
+     [self addChild:board];
+        TheLogger(@"⚪️ pawnWidth=%f , pawnHeight=%f",[geoCalculations pawnWidth],[geoCalculations pawnHeight]);
     
 }
 
@@ -283,7 +287,7 @@ so, it is implemented in a private interface declaration inside of the implement
     if(shouldLocationChange&&isPawnTouched)
     {
         TheLogger(@"pawn is on the move ✅ SUCCESS");
-        SKAction *hareketEttir=[SKAction moveTo:touchLocation duration:0.1];
+        SKAction *hareketEttir=[SKAction moveTo:touchLocation duration:0.05];
         [selectedPawn runAction:hareketEttir completion:^{
             shouldLocationChange=NO;
         }];
