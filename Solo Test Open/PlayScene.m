@@ -364,14 +364,25 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     TheLogger(@"🔵 CALLED");
     TheLogger(@"a pawn will remove ✅ SUCCESS");
-    [[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
+    SKAction *shrinkPawn=[SKAction resizeToWidth:0 height:0 duration:0.5];
+    SKAction *removePawn=[SKAction removeFromParent];
+    [SKAction sequence:@[shrinkPawn,removePawn]];
+    
+    SKSpriteNode *nodeToRemove=(SKSpriteNode *)[[self childNodeWithName:@"board"]nodeAtPoint:position];
+                                
+     [nodeToRemove runAction:[SKAction sequence:@[shrinkPawn,removePawn]]];
+    //[[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
 }
 
 -(void)resetScene
 {
-    [self removeAllActions];
-    [self removeAllChildren];
-    [self createSceneContents];
+    if([self contentCreated])
+    {
+        [self removeAllActions];
+        [self removeAllChildren];
+        [self createSceneContents];
+    }
+    
 }
 
 #pragma mark - Update
