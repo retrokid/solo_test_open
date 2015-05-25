@@ -15,6 +15,8 @@
 		0B5CC2D91B09E10500A0FA6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2D81B09E10500A0FA6C /* Images.xcassets */; };
 		0B5CC2DC1B09E10500A0FA6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */; };
 		0B5CC2E81B09E10500A0FA6C /* Solo_Test_OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */; };
+		0B6233A31B135DB8008F319A /* PawnNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6233A21B135DB8008F319A /* PawnNode.m */; };
+		0B6233A61B136C91008F319A /* BoardNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6233A51B136C91008F319A /* BoardNode.m */; };
 		0B6DBF1E1B0C7A2800237CD5 /* GameAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF1D1B0C7A2800237CD5 /* GameAssets.m */; };
 		0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */; };
 		0B6DBF241B0C7BAF00237CD5 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */; };
@@ -48,6 +50,10 @@
 		0B5CC2E11B09E10500A0FA6C /* Solo Test OpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo Test OpenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5CC2E61B09E10500A0FA6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Solo_Test_OpenTests.m; sourceTree = "<group>"; };
+		0B6233A11B135DB8008F319A /* PawnNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PawnNode.h; sourceTree = "<group>"; };
+		0B6233A21B135DB8008F319A /* PawnNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PawnNode.m; sourceTree = "<group>"; };
+		0B6233A41B136C91008F319A /* BoardNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardNode.h; sourceTree = "<group>"; };
+		0B6233A51B136C91008F319A /* BoardNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardNode.m; sourceTree = "<group>"; };
 		0B6DBF1C1B0C7A2800237CD5 /* GameAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAssets.h; sourceTree = "<group>"; };
 		0B6DBF1D1B0C7A2800237CD5 /* GameAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameAssets.m; sourceTree = "<group>"; };
 		0B6DBF1F1B0C7B6500237CD5 /* GeoCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoCalc.h; sourceTree = "<group>"; };
@@ -118,6 +124,10 @@
 				0B6DBF231B0C7BAF00237CD5 /* GameLogic.m */,
 				0B42F3C61B0F568900EF839D /* TweensAnimations.h */,
 				0B42F3C71B0F568900EF839D /* TweensAnimations.m */,
+				0B6233A11B135DB8008F319A /* PawnNode.h */,
+				0B6233A21B135DB8008F319A /* PawnNode.m */,
+				0B6233A41B136C91008F319A /* BoardNode.h */,
+				0B6233A51B136C91008F319A /* BoardNode.m */,
 			);
 			path = "Solo Test Open";
 			sourceTree = "<group>";
@@ -259,6 +269,8 @@
 				0B5CC2D41B09E10500A0FA6C /* ViewController.m in Sources */,
 				0B5CC2D11B09E10500A0FA6C /* AppDelegate.m in Sources */,
 				0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */,
+				0B6233A31B135DB8008F319A /* PawnNode.m in Sources */,
+				0B6233A61B136C91008F319A /* BoardNode.m in Sources */,
 				0B6DBF1E1B0C7A2800237CD5 /* GameAssets.m in Sources */,
 				0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */,
 				0B5CC2CE1B09E10500A0FA6C /* main.m in Sources */,

@@ -73,8 +73,11 @@ so, it is implemented in a private interface declaration inside of the implement
     selectedPawn=[[SKSpriteNode alloc]init];
     boardPawnPoints=[gameLogic boardPawnPoints];
 
+    /*
     board=[gameAssets createBoardNodeFromFrame:self.frame andSize:geoCalculations.boardSize];
     [board setName:@"board"];
+    */
+    board=[[BoardNode alloc]initFromFrame:self.frame];
     
     rays=[gameAssets createStaticRaysWithHSize:geoCalculations.HSize andVSize:geoCalculations.VSize andBoardPawnPointsCoordinates:geoCalculations.boardPawnPointsCoordinates];
     
@@ -125,20 +128,21 @@ so, it is implemented in a private interface declaration inside of the implement
     
     boardPawnPointsCoordinates=[geoCalculations boardPawnPointsCoordinates];
     
-    CGPoint pawnStartupPosition=CGPointMake(0-[geoCalculations boardMaxWidth], 0);
-    
     for (NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
         if(!([boardPawnPointsCoordinates[i] CGPointValue].x==0 && [boardPawnPointsCoordinates[i] CGPointValue].y==0))
         {
-            SKSpriteNode *pawn=[gameAssets createPawnWithSize:[geoCalculations pawnSize]];
-            [pawn setName:@"pawn"];
+            //SKSpriteNode *pawn=[gameAssets createPawnWithSize:[geoCalculations pawnSize]];
+            SKSpriteNode *pawn=[[PawnNode alloc]initWithBoardSize:[geoCalculations boardSize] andName:@"pawn"];
+            //[pawn setName:@"pawn"];
             //[pawn setPosition:[boardPawnPointsCoordinates[i] CGPointValue]];
-            [pawn setPosition:pawnStartupPosition];
+            //[pawn setPosition:pawnStartupPosition];
             [pawns addObject:pawn];
             [board addChild:pawn];
+            
+            //SKSpriteNode *aPawn=[[PawnNode alloc]initWithBoardSize:[geoCalculations boardSize] andName:@"pawn"];
+            
         }
-        
     }
     
     [self addChild:board];
@@ -364,7 +368,7 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     TheLogger(@"🔵 CALLED");
     TheLogger(@"a pawn will remove ✅ SUCCESS");
-    SKAction *shrinkPawn=[SKAction resizeToWidth:0 height:0 duration:0.5];
+    SKAction *shrinkPawn=[SKAction resizeToWidth:0 height:0 duration:0.2];
     SKAction *removePawn=[SKAction removeFromParent];
     [SKAction sequence:@[shrinkPawn,removePawn]];
     

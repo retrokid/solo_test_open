@@ -29,6 +29,9 @@
 #import "GameLogic.h"
 #import "GeoCalc.h"
 
+#import "PawnNode.h"
+#import "BoardNode.h"
+
 @interface PlayScene : SKScene
 {
     BOOL isPawnTouched;
