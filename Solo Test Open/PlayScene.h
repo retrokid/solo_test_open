@@ -42,7 +42,7 @@
     CGPoint selectedPawnLastPosition;
     
     NSMutableArray *boardPawnPoints;
-    //#ToDo: change name
+    
     NSInteger pickupPoint;
     NSInteger dropPoint;
     NSInteger removePoint;
@@ -56,6 +56,8 @@
     GeoCalc *geoCalculations;
     GameAssets *gameAssets;
     GameLogic *gameLogic;
+    
+    NSMutableArray *pawns;
 }
 
 -(void)createSceneContents;

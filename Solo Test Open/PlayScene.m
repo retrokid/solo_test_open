@@ -56,6 +56,7 @@ so, it is implemented in a private interface declaration inside of the implement
 -(void)createSceneContents
 {
     TheLogger(@"🔵 CALLED");
+    pawns=[[NSMutableArray alloc]init];
     gameAssets=[[GameAssets alloc]init];
     gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
@@ -71,8 +72,6 @@ so, it is implemented in a private interface declaration inside of the implement
     
     selectedPawn=[[SKSpriteNode alloc]init];
     boardPawnPoints=[gameLogic boardPawnPoints];
-    
-#warning ToDo geoCalculations make getter setter or @property @@synthesize
 
     board=[gameAssets createBoardNodeFromFrame:self.frame andSize:geoCalculations.boardSize];
     [board setName:@"board"];
@@ -126,7 +125,7 @@ so, it is implemented in a private interface declaration inside of the implement
     
     boardPawnPointsCoordinates=[geoCalculations boardPawnPointsCoordinates];
     
-    #warning ToDo: create nsmutabledictionary for pawns and make animations!!
+    CGPoint pawnStartupPosition=CGPointMake(0-[geoCalculations boardMaxWidth], 0);
     
     for (NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
     {
@@ -134,7 +133,9 @@ so, it is implemented in a private interface declaration inside of the implement
         {
             SKSpriteNode *pawn=[gameAssets createPawnWithSize:[geoCalculations pawnSize]];
             [pawn setName:@"pawn"];
-            [pawn setPosition:[boardPawnPointsCoordinates[i] CGPointValue]];
+            //[pawn setPosition:[boardPawnPointsCoordinates[i] CGPointValue]];
+            [pawn setPosition:pawnStartupPosition];
+            [pawns addObject:pawn];
             [board addChild:pawn];
         }
         
@@ -144,11 +145,29 @@ so, it is implemented in a private interface declaration inside of the implement
     
     SKLabelNode *resetButton=[[SKLabelNode alloc]init];
     [resetButton setText:@"RESET"];
-    [resetButton setColor:[SKColor redColor]];
+    [resetButton setColor:[SKColor whiteColor]];
     [resetButton setPosition:CGPointMake(CGRectGetMaxX([self frame])-resetButton.frame.size.width, CGRectGetMaxY([self frame])-resetButton.frame.size.height*2)];
     [resetButton setName:@"reset"];
     [self addChild:resetButton];
     
+    for(NSInteger i=0,isOrigin=0;i<[boardPawnPointsCoordinates count];i++)
+    {
+        if(!([boardPawnPointsCoordinates[i]CGPointValue].y==0 && [boardPawnPointsCoordinates[i]CGPointValue].x==0))
+        {
+            if(isOrigin==1)
+            {
+                [pawns[i-1] runAction:[SKAction moveTo:[boardPawnPointsCoordinates[i] CGPointValue] duration:0.7]];
+            }
+            else
+            {
+                [pawns[i] runAction:[SKAction moveTo:[boardPawnPointsCoordinates[i] CGPointValue] duration:0.7]];
+            }
+        }
+        else
+        {
+            isOrigin=1;
+        }
+    }
     [[rays objectForKey:@"h1"] runAction:[SKAction moveTo:CGPointMake(startupH1XPosition+[self frame].size.width, startupH1YPosition) duration:0.7]];
     [[rays objectForKey:@"h2"] runAction:[SKAction moveTo:CGPointMake(startupH2XPosition-[self frame].size.width, startupH2YPosition) duration:0.7]];
     [[rays objectForKey:@"h3"] runAction:[SKAction moveTo:CGPointMake(startupH3XPosition+[self frame].size.width, startupH3YPosition) duration:0.7]];
