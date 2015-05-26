@@ -60,8 +60,6 @@ so, it is implemented in a private interface declaration inside of the implement
     gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
     
-    possibleMovements=[gameLogic possibleMovements];
-    
     self.backgroundColor=[SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
 
@@ -244,7 +242,7 @@ so, it is implemented in a private interface declaration inside of the implement
         if (dropPoint!=-1)
         {
             TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:board.currentPawnPoints];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
             
             if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
@@ -257,7 +255,7 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[pickupPoint]=@NO;
                     board.currentPawnPoints[removePoint]=@NO;
                     board.currentPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:possibleMovements])
+                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:board.possibleMovements])
                     {
                         TheLogger(@"no more moves ⛔️ SUCCESS");
                         [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
@@ -312,7 +310,7 @@ so, it is implemented in a private interface declaration inside of the implement
         if (dropPoint!=-1)
         {
             TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:board.currentPawnPoints];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
             
             if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
@@ -325,7 +323,7 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[pickupPoint]=@NO;
                     board.currentPawnPoints[removePoint]=@NO;
                     board.currentPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:possibleMovements])
+                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:board.possibleMovements])
                     {
                         TheLogger(@"no more moves ⛔️ SUCCESS");
                         [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];

@@ -33,6 +33,7 @@
 #define TheLogger(s, ...) NSLog(@"<%@> -%@ Line:%d | %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], NSStringFromSelector(_cmd), __LINE__,[NSString stringWithFormat:(s), ##__VA_ARGS__])
 @implementation GameLogic
 
+//moved
 -(NSArray *)possibleMovements
 {
     TheLogger(@"🔵 CALLED");
@@ -117,6 +118,7 @@
     return possibleMovementsArray;
 }
 
+//moved
 -(NSMutableArray *)boardPawnPoints
 {
     TheLogger(@"🔵 CALLED");
@@ -130,6 +132,7 @@
     return boardPawnPoints;
 }
 
+//moved
 -(BOOL)isThereAnyMovementsLeftIn:(NSMutableArray *)theBoardPawnPoints compareWith:(NSArray *)thePossibleMovements
 {
     TheLogger(@"🔵 CALLED");
@@ -148,6 +151,7 @@
     return NO;
 }
 
+//moved
 -(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
 {
     TheLogger(@"🔵 CALLED");
@@ -171,6 +175,7 @@
     return NO;
 }
 
+//moved
 -(NSInteger)findRemovePointOfPawn:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint inThe:(NSArray *)possibleMovements coordinates:(NSMutableArray *)theBoardPawnPoints
 {
     TheLogger(@"🔵 CALLED");
@@ -194,6 +199,7 @@
     return -1;
 }
 
+//moved
 -(NSInteger)numberOfRemainingPawnsIn:(NSMutableArray *)theBoardPawnPoints
 {
     TheLogger(@"🔵 CALLED");

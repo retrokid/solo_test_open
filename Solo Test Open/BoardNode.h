@@ -12,6 +12,7 @@
 {
     NSArray *pawnPointsCoordinates;
     NSMutableArray *currentPawnPoints;
+    NSArray *possibleMovements;
 }
 
 @property NSUInteger numberOfPawnPoints;
@@ -24,5 +25,13 @@
 -(NSArray *)pawnPointsCoordinates;
 -(void)setCurrentPawnPoints;
 -(NSMutableArray *)currentPawnPoints;
+-(void)setPossibleMovements;
+-(NSArray *)possibleMovements;
+
+//game methods
+-(NSInteger)numberOfRemainingPawnsOnBoard;
+-(BOOL)isThereAnyMovementsLeft;
+-(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint;
+-(NSInteger)findRemovePointOfPawn:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint;
 
 @end

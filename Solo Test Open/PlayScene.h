@@ -41,7 +41,6 @@
     
     CGPoint touchLocation;
     
-    
     SKNode *selectedPawn;
     CGFloat selectedPawnZPosition;
     CGPoint selectedPawnLastPosition;
@@ -49,8 +48,6 @@
     NSInteger pickupPoint;
     NSInteger dropPoint;
     NSInteger removePoint;
-    
-    NSArray *possibleMovements;
 
     BoardNode *board;
     NSMutableDictionary *rays;
