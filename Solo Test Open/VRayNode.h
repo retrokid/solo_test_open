@@ -10,6 +10,8 @@
 
 @interface VRayNode : SKSpriteNode
 
-- (id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition;
+@property CGPoint startupPosition;
+
+-(id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition;
 
 @end

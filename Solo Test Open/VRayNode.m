@@ -10,7 +10,9 @@
 
 @implementation VRayNode
 
-- (id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition
+@synthesize startupPosition;
+
+-(id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition
 {
     self = [super init];
     if (self)

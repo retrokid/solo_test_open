@@ -75,44 +75,13 @@ so, it is implemented in a private interface declaration inside of the implement
     
     rays=[self createRays];
     
+    [[rays objectForKey:@"h1"] setPosition:[[rays objectForKey:@"h1"]startupPosition]];
+    [[rays objectForKey:@"h2"] setPosition:[[rays objectForKey:@"h2"]startupPosition]];
+    [[rays objectForKey:@"h3"] setPosition:[[rays objectForKey:@"h3"]startupPosition]];
     
-    CGFloat startupH1XPosition;
-    CGFloat startupH1YPosition;
-    CGFloat startupH2XPosition;
-    CGFloat startupH2YPosition;
-    CGFloat startupH3XPosition;
-    CGFloat startupH3YPosition;
-    
-    CGFloat startupV1XPosition;
-    CGFloat startupV1YPosition;
-    CGFloat startupV2XPosition;
-    CGFloat startupV2YPosition;
-    CGFloat startupV3XPosition;
-    CGFloat startupV3YPosition;
-    
-    startupH1XPosition=[[rays objectForKey:@"h1"]position].x-[self frame].size.width;
-    startupH1YPosition=[[rays objectForKey:@"h1"]position].y;
-    [[rays objectForKey:@"h1"] setPosition:CGPointMake(startupH1XPosition, startupH1YPosition)];
-    
-    startupH2XPosition=[[rays objectForKey:@"h2"]position].x+[self frame].size.width;
-    startupH2YPosition=[[rays objectForKey:@"h2"]position].y;
-    [[rays objectForKey:@"h2"] setPosition:CGPointMake(startupH2XPosition, startupH2YPosition)];
-    
-    startupH3XPosition=[[rays objectForKey:@"h3"]position].x-[self frame].size.width;
-    startupH3YPosition=[[rays objectForKey:@"h3"]position].y;
-    [[rays objectForKey:@"h3"] setPosition:CGPointMake(startupH3XPosition, startupH3YPosition)];
-    
-    startupV1XPosition=[[rays objectForKey:@"v1"]position].x;
-    startupV1YPosition=[[rays objectForKey:@"v1"]position].y-[self frame].size.height;
-    [[rays objectForKey:@"v1"] setPosition:CGPointMake(startupV1XPosition, startupV1YPosition)];
-    
-    startupV2XPosition=[[rays objectForKey:@"v2"]position].x;
-    startupV2YPosition=[[rays objectForKey:@"v2"]position].y+[self frame].size.height;
-    [[rays objectForKey:@"v2"] setPosition:CGPointMake(startupV2XPosition, startupV2YPosition)];
-    
-    startupV3XPosition=[[rays objectForKey:@"v3"]position].x;
-    startupV3YPosition=[[rays objectForKey:@"v3"]position].y-[self frame].size.height;
-    [[rays objectForKey:@"v3"] setPosition:CGPointMake(startupV3XPosition, startupV3YPosition)];
+    [[rays objectForKey:@"v1"] setPosition:[[rays objectForKey:@"v1"]startupPosition]];
+    [[rays objectForKey:@"v2"] setPosition:[[rays objectForKey:@"v2"]startupPosition]];
+    [[rays objectForKey:@"v3"] setPosition:[[rays objectForKey:@"v3"]startupPosition]];
     
     [board addChild:[rays objectForKey:@"h1"]];
     [board addChild:[rays objectForKey:@"h2"]];
@@ -163,13 +132,13 @@ so, it is implemented in a private interface declaration inside of the implement
             isOrigin=1;
         }
     }
-    [[rays objectForKey:@"h1"] runAction:[SKAction moveTo:CGPointMake(startupH1XPosition+[self frame].size.width, startupH1YPosition) duration:0.7]];
-    [[rays objectForKey:@"h2"] runAction:[SKAction moveTo:CGPointMake(startupH2XPosition-[self frame].size.width, startupH2YPosition) duration:0.7]];
-    [[rays objectForKey:@"h3"] runAction:[SKAction moveTo:CGPointMake(startupH3XPosition+[self frame].size.width, startupH3YPosition) duration:0.7]];
+    [[rays objectForKey:@"h1"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"h1"]startupPosition].x+[self frame].size.width, [[rays objectForKey:@"h1"]startupPosition].y) duration:0.7]];
+    [[rays objectForKey:@"h2"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"h2"]startupPosition].x-[self frame].size.width, [[rays objectForKey:@"h2"]startupPosition].y) duration:0.7]];
+    [[rays objectForKey:@"h3"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"h3"]startupPosition].x+[self frame].size.width, [[rays objectForKey:@"h3"]startupPosition].y) duration:0.7]];
     
-    [[rays objectForKey:@"v1"] runAction:[SKAction moveTo:CGPointMake(startupV1XPosition, startupV1YPosition+[self frame].size.height) duration:0.7]];
-    [[rays objectForKey:@"v2"] runAction:[SKAction moveTo:CGPointMake(startupV2XPosition, startupV2YPosition-[self frame].size.height) duration:0.7]];
-    [[rays objectForKey:@"v3"] runAction:[SKAction moveTo:CGPointMake(startupV3XPosition, startupV3YPosition+[self frame].size.height) duration:0.7]];
+    [[rays objectForKey:@"v1"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"v1"]startupPosition].x, [[rays objectForKey:@"v1"]startupPosition].y+[self frame].size.height) duration:0.7]];
+    [[rays objectForKey:@"v2"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"v2"]startupPosition].x, [[rays objectForKey:@"v2"]startupPosition].y-[self frame].size.height) duration:0.7]];
+    [[rays objectForKey:@"v3"] runAction:[SKAction moveTo:CGPointMake([[rays objectForKey:@"v3"]startupPosition].x, [[rays objectForKey:@"v3"]startupPosition].y+[self frame].size.height) duration:0.7]];
 }
 
 #pragma mark - Touch Events
@@ -385,6 +354,14 @@ so, it is implemented in a private interface declaration inside of the implement
     VRayNode *v1Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v1" andPosition:[board.pawnPointsCoordinates[15] CGPointValue]];
     VRayNode *v2Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v2" andPosition:[board.pawnPointsCoordinates[16] CGPointValue]];
     VRayNode *v3Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v3" andPosition:[board.pawnPointsCoordinates[17] CGPointValue]];
+    
+    [h1Ray setStartupPosition:CGPointMake(h1Ray.position.x-[self frame].size.width, h1Ray.position.y)];
+    [h2Ray setStartupPosition:CGPointMake(h2Ray.position.x+[self frame].size.width, h2Ray.position.y)];
+    [h3Ray setStartupPosition:CGPointMake(h3Ray.position.x-[self frame].size.width, h3Ray.position.y)];
+    
+    [v1Ray setStartupPosition:CGPointMake(v1Ray.position.x, v1Ray.position.y-[self frame].size.height)];
+    [v2Ray setStartupPosition:CGPointMake(v2Ray.position.x, v2Ray.position.y+[self frame].size.height)];
+    [v3Ray setStartupPosition:CGPointMake(v3Ray.position.x, v3Ray.position.y-[self frame].size.height)];
     
     [raysDictionary setValue:h1Ray forKey:h1Ray.name];
     [raysDictionary setValue:h2Ray forKey:h2Ray.name];

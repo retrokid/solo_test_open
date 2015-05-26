@@ -10,6 +10,8 @@
 
 @implementation HRayNode
 
+@synthesize startupPosition;
+
 - (id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition
 {
     self = [super init];
