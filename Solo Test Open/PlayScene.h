@@ -53,7 +53,7 @@
     NSArray *possibleMovements;
     NSArray *boardPawnPointsCoordinates;
 
-    SKSpriteNode *board;
+    BoardNode *board;
     NSMutableDictionary *rays;
     
     GeoCalc *geoCalculations;

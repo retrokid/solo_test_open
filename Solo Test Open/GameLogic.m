@@ -205,7 +205,7 @@
             remainingPawns++;
         }
     }
-    TheLogger(@"⚪️ number of remaining pawns=%d",remainingPawns);
+    TheLogger(@"⚪️ number of remaining pawns=%lu",(unsigned long)remainingPawns);
     return remainingPawns;
 }
 

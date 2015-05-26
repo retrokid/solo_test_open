@@ -9,7 +9,17 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface BoardNode : SKSpriteNode
+{
+    NSArray *pawnPointsCoordinates;
+    NSUInteger numberOfPawnPoints;
+}
 
 - (id)initFromFrame:(CGRect)theFrame;
+
+//getter setters
+-(void)setPawnPointsCoordinates:(CGRect)theFrame;
+-(NSArray *)pawnPointsCoordinates;
+-(NSUInteger)numberOfPawnPoints;
+-(void)setNumberOfPawnPoints;
 
 @end

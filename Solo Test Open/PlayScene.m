@@ -79,6 +79,7 @@ so, it is implemented in a private interface declaration inside of the implement
     */
     board=[[BoardNode alloc]initFromFrame:self.frame];
     
+    
     rays=[gameAssets createStaticRaysWithHSize:geoCalculations.HSize andVSize:geoCalculations.VSize andBoardPawnPointsCoordinates:geoCalculations.boardPawnPointsCoordinates];
     
     CGFloat startupH1XPosition;
