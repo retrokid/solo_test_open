@@ -57,7 +57,7 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     TheLogger(@"🔵 CALLED");
     pawns=[[NSMutableArray alloc]init];
-    gameLogic=[[GameLogic alloc]init];
+    //gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
     
     self.backgroundColor=[SKColor blackColor];
@@ -242,8 +242,8 @@ so, it is implemented in a private interface declaration inside of the implement
         if (dropPoint!=-1)
         {
             TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
-            
+            //removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
+            removePoint=[board findRemovePointOfPawn:pickupPoint to:dropPoint];
             if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
                 TheLogger(@"move is possible ✅ SUCCESS");
@@ -255,15 +255,13 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[pickupPoint]=@NO;
                     board.currentPawnPoints[removePoint]=@NO;
                     board.currentPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:board.possibleMovements])
+                    if(![board isThereAnyMovementsLeft])
                     {
                         TheLogger(@"no more moves ⛔️ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                     else
                     {
                         TheLogger(@"there are more moves ✅ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                 }];
                 
@@ -298,10 +296,8 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    TheLogger(@"🔵 CALLED");
     if(isPawnTouched)
     {
-        
         [selectedPawn setZPosition:selectedPawnZPosition];
         [selectedPawn setScale:1.0];
         
@@ -309,12 +305,9 @@ so, it is implemented in a private interface declaration inside of the implement
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:board.pawnPointsCoordinates];
         if (dropPoint!=-1)
         {
-            TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
-            
+            removePoint=[board findRemovePointOfPawn:pickupPoint to:dropPoint];
             if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
-                TheLogger(@"move is possible ✅ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:[board.pawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
                 
                 [selectedPawn runAction:hareketEttir completion:^{
@@ -323,15 +316,13 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[pickupPoint]=@NO;
                     board.currentPawnPoints[removePoint]=@NO;
                     board.currentPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:board.possibleMovements])
+                    if(![board isThereAnyMovementsLeft])
                     {
                         TheLogger(@"no more moves ⛔️ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                     else
                     {
                         TheLogger(@"there are more moves ✅ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                 }];
                 
@@ -340,8 +331,6 @@ so, it is implemented in a private interface declaration inside of the implement
             {
                 TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
-                
-                
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
                 }];
@@ -353,12 +342,9 @@ so, it is implemented in a private interface declaration inside of the implement
         {
             TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
-            
-            
             [selectedPawn runAction:hareketEttir completion:^{
                 shouldLocationChange=NO;
             }];
-            
         }
     }
     isPawnTouched=NO;
@@ -368,8 +354,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)removePawnAtPosition:(CGPoint)position
 {
-    TheLogger(@"🔵 CALLED");
-    TheLogger(@"a pawn will remove ✅ SUCCESS");
     SKAction *shrinkPawn=[SKAction resizeToWidth:0 height:0 duration:0.2];
     SKAction *removePawn=[SKAction removeFromParent];
     [SKAction sequence:@[shrinkPawn,removePawn]];
@@ -377,7 +361,6 @@ so, it is implemented in a private interface declaration inside of the implement
     SKSpriteNode *nodeToRemove=(SKSpriteNode *)[[self childNodeWithName:@"board"]nodeAtPoint:position];
                                 
      [nodeToRemove runAction:[SKAction sequence:@[shrinkPawn,removePawn]]];
-    //[[[self childNodeWithName:@"board"]nodeAtPoint:position]removeFromParent];
 }
 
 -(void)resetScene

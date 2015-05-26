@@ -25,7 +25,6 @@
  */
 #import <SpriteKit/SpriteKit.h>
 
-#import "GameLogic.h"
 #import "GeoCalc.h"
 
 #import "PawnNode.h"
@@ -53,7 +52,6 @@
     NSMutableDictionary *rays;
     
     GeoCalc *geoCalculations;
-    GameLogic *gameLogic;
     
     NSMutableArray *pawns;
 }
