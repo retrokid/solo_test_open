@@ -12,6 +12,8 @@
 
 @property CGPoint startupPosition;
 
+//init
 - (id)initWithBoardSize:(CGSize)boardSize name:(NSString *)theName andPosition:(CGPoint)thePosition;
+
 
 @end

@@ -18,7 +18,7 @@
 @property NSUInteger numberOfPawnPoints;
 
 //init
-- (id)initFromFrame:(CGRect)theFrame;
+-(id)initFromFrame:(CGRect)theFrame;
 
 //getter setters
 -(void)setPawnPointsCoordinates:(CGRect)theFrame;

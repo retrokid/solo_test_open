@@ -12,7 +12,7 @@
 
 @synthesize numberOfPawnPoints;
 
-- (id)initFromFrame:(CGRect)theFrame
+-(id)initFromFrame:(CGRect)theFrame
 {
     self = [super init];
     if (self)
