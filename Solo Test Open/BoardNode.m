@@ -24,8 +24,25 @@
         [self setPawnPointsCoordinates:theFrame];
         [self setNumberOfPawnPoints:[[self pawnPointsCoordinates] count]];
         [self setSize:CGSizeMake(CGRectGetWidth(theFrame), CGRectGetWidth(theFrame))];
+        [self setCurrentPawnPoints];
     }
     return self;
+}
+
+-(void)setCurrentPawnPoints
+{
+    NSMutableArray *theCurrentPawnPoints=[[NSMutableArray alloc]init];
+    for(NSInteger i=0;i<33;i++)
+    {
+        [theCurrentPawnPoints addObject:@YES];
+    }
+    theCurrentPawnPoints[16]=@NO;
+    currentPawnPoints=theCurrentPawnPoints;
+}
+
+-(NSMutableArray *)currentPawnPoints
+{
+    return currentPawnPoints;
 }
 
 -(NSArray *)pawnPointsCoordinates

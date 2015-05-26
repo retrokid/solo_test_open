@@ -25,12 +25,13 @@
  */
 #import <SpriteKit/SpriteKit.h>
 
-#import "GameAssets.h"
 #import "GameLogic.h"
 #import "GeoCalc.h"
 
 #import "PawnNode.h"
 #import "BoardNode.h"
+#import "VRayNode.h"
+#import "HRayNode.h"
 
 @interface PlayScene : SKScene
 {
@@ -45,20 +46,16 @@
     CGFloat selectedPawnZPosition;
     CGPoint selectedPawnLastPosition;
     
-    NSMutableArray *boardPawnPoints;
-    
     NSInteger pickupPoint;
     NSInteger dropPoint;
     NSInteger removePoint;
     
     NSArray *possibleMovements;
-    NSArray *boardPawnPointsCoordinates;
 
     BoardNode *board;
     NSMutableDictionary *rays;
     
     GeoCalc *geoCalculations;
-    GameAssets *gameAssets;
     GameLogic *gameLogic;
     
     NSMutableArray *pawns;

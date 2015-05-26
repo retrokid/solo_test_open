@@ -57,7 +57,6 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     TheLogger(@"🔵 CALLED");
     pawns=[[NSMutableArray alloc]init];
-    gameAssets=[[GameAssets alloc]init];
     gameLogic=[[GameLogic alloc]init];
     geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
     
@@ -71,12 +70,13 @@ so, it is implemented in a private interface declaration inside of the implement
     shouldLocationChange=YES;
     
     selectedPawn=[[SKSpriteNode alloc]init];
-    boardPawnPoints=[gameLogic boardPawnPoints];
 
     board=[[BoardNode alloc]initFromFrame:self.frame];
     
+    rays=[[NSMutableDictionary alloc]init];
     
-    rays=[gameAssets createStaticRaysWithHSize:geoCalculations.HSize andVSize:geoCalculations.VSize andBoardPawnPointsCoordinates:geoCalculations.boardPawnPointsCoordinates];
+    rays=[self createRays];
+    
     
     CGFloat startupH1XPosition;
     CGFloat startupH1YPosition;
@@ -123,8 +123,6 @@ so, it is implemented in a private interface declaration inside of the implement
     [board addChild:[rays objectForKey:@"v2"]];
     [board addChild:[rays objectForKey:@"v3"]];
     
-    boardPawnPointsCoordinates=[geoCalculations boardPawnPointsCoordinates];
-    
     for (NSInteger i=0;i<[board numberOfPawnPoints];i++)
     {
         if(!([board.pawnPointsCoordinates[i] CGPointValue].x==0 &&
@@ -149,17 +147,17 @@ so, it is implemented in a private interface declaration inside of the implement
     [self addChild:resetButton];
     
     //pawn animations
-    for(NSInteger i=0,isOrigin=0;i<[boardPawnPointsCoordinates count];i++)
+    for(NSInteger i=0,isOrigin=0;i<[board.pawnPointsCoordinates count];i++)
     {
-        if(!([boardPawnPointsCoordinates[i]CGPointValue].y==0 && [boardPawnPointsCoordinates[i]CGPointValue].x==0))
+        if(!([board.pawnPointsCoordinates[i]CGPointValue].y==0 && [board.pawnPointsCoordinates[i]CGPointValue].x==0))
         {
             if(isOrigin==1)
             {
-                [pawns[i-1] runAction:[SKAction moveTo:[boardPawnPointsCoordinates[i] CGPointValue] duration:0.7]];
+                [pawns[i-1] runAction:[SKAction moveTo:[board.pawnPointsCoordinates[i] CGPointValue] duration:0.7]];
             }
             else
             {
-                [pawns[i] runAction:[SKAction moveTo:[boardPawnPointsCoordinates[i] CGPointValue] duration:0.7]];
+                [pawns[i] runAction:[SKAction moveTo:[board.pawnPointsCoordinates[i] CGPointValue] duration:0.7]];
             }
         }
         else
@@ -202,7 +200,7 @@ so, it is implemented in a private interface declaration inside of the implement
                 selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
                 selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
                 selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
-                pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:boardPawnPointsCoordinates];
+                pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:board.pawnPointsCoordinates];
                 [selectedPawn setZPosition:500];
                 [selectedPawn setScale:2.0];
                 
@@ -242,32 +240,32 @@ so, it is implemented in a private interface declaration inside of the implement
         [selectedPawn setScale:1.0];
         
         
-        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
+        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:board.pawnPointsCoordinates];
         if (dropPoint!=-1)
         {
             TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:board.currentPawnPoints];
             
-            if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
+            if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
                 TheLogger(@"move is possible ✅ SUCCESS");
-                SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
+                SKAction *hareketEttir=[SKAction moveTo:[board.pawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
                 
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
-                    [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
-                    boardPawnPoints[pickupPoint]=@NO;
-                    boardPawnPoints[removePoint]=@NO;
-                    boardPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:boardPawnPoints compareWith:possibleMovements])
+                    [self removePawnAtPosition:[board.pawnPointsCoordinates[removePoint] CGPointValue]];
+                    board.currentPawnPoints[pickupPoint]=@NO;
+                    board.currentPawnPoints[removePoint]=@NO;
+                    board.currentPawnPoints[dropPoint]=@YES;
+                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:possibleMovements])
                     {
                         TheLogger(@"no more moves ⛔️ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
+                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                     else
                     {
                         TheLogger(@"there are more moves ✅ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
+                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
                     }
                 }];
                 
@@ -306,39 +304,38 @@ so, it is implemented in a private interface declaration inside of the implement
     if(isPawnTouched)
     {
         
-         [selectedPawn setZPosition:selectedPawnZPosition];
-         [selectedPawn setScale:1.0];
-
+        [selectedPawn setZPosition:selectedPawnZPosition];
+        [selectedPawn setScale:1.0];
         
-        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
+        
+        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:board.pawnPointsCoordinates];
         if (dropPoint!=-1)
         {
             TheLogger(@"pawn point is empty ✅ SUCCESS");
-            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:boardPawnPoints];
+            removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:possibleMovements coordinates:board.currentPawnPoints];
             
-            if (dropPoint!=-1 && ![boardPawnPoints[dropPoint] boolValue] && removePoint!=-1)
+            if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
                 TheLogger(@"move is possible ✅ SUCCESS");
-                SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
+                SKAction *hareketEttir=[SKAction moveTo:[board.pawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
                 
-                
-                 [selectedPawn runAction:hareketEttir completion:^{
-                 shouldLocationChange=NO;
-                 [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
-                 boardPawnPoints[pickupPoint]=@NO;
-                 boardPawnPoints[removePoint]=@NO;
-                 boardPawnPoints[dropPoint]=@YES;
-                 if(![gameLogic isThereAnyMovementsLeftIn:boardPawnPoints compareWith:possibleMovements])
-                 {
-                 TheLogger(@"no more moves ⛔️ SUCCESS");
-                 [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
-                 }
-                 else
-                 {
-                 TheLogger(@"there are more moves ✅ SUCCESS");
-                 [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
-                 }
-                 }];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                    [self removePawnAtPosition:[board.pawnPointsCoordinates[removePoint] CGPointValue]];
+                    board.currentPawnPoints[pickupPoint]=@NO;
+                    board.currentPawnPoints[removePoint]=@NO;
+                    board.currentPawnPoints[dropPoint]=@YES;
+                    if(![gameLogic isThereAnyMovementsLeftIn:board.currentPawnPoints compareWith:possibleMovements])
+                    {
+                        TheLogger(@"no more moves ⛔️ SUCCESS");
+                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
+                    }
+                    else
+                    {
+                        TheLogger(@"there are more moves ✅ SUCCESS");
+                        [gameLogic numberOfRemainingPawnsIn:board.currentPawnPoints];
+                    }
+                }];
                 
             }
             else
@@ -347,9 +344,9 @@ so, it is implemented in a private interface declaration inside of the implement
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
                 
                 
-                 [selectedPawn runAction:hareketEttir completion:^{
-                 shouldLocationChange=NO;
-                 }];
+                [selectedPawn runAction:hareketEttir completion:^{
+                    shouldLocationChange=NO;
+                }];
                 
             }
             
@@ -360,25 +357,16 @@ so, it is implemented in a private interface declaration inside of the implement
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
             
             
-             [selectedPawn runAction:hareketEttir completion:^{
-             shouldLocationChange=NO;
-             }];
+            [selectedPawn runAction:hareketEttir completion:^{
+                shouldLocationChange=NO;
+            }];
             
         }
     }
     isPawnTouched=NO;
 }
 
-#pragma mark - SKActions
-
--(SKAction *)vRayStartup:(SKSpriteNode *)aVRay
-{
-    
-    return [SKAction moveToY:aVRay.position.y duration:2];
-}
-
-
-#pragma mark - Scene Actions
+#pragma mark - Scene Methods
 
 -(void)removePawnAtPosition:(CGPoint)position
 {
@@ -403,6 +391,29 @@ so, it is implemented in a private interface declaration inside of the implement
         [self createSceneContents];
     }
     
+}
+
+-(NSMutableDictionary *)createRays
+{
+    NSMutableDictionary *raysDictionary=[[NSMutableDictionary alloc]init];
+    
+    HRayNode *h1Ray=[[HRayNode alloc]initWithBoardSize:board.size name:@"h1" andPosition:[board.pawnPointsCoordinates[23] CGPointValue]];
+    HRayNode *h2Ray=[[HRayNode alloc]initWithBoardSize:board.size name:@"h2" andPosition:[board.pawnPointsCoordinates[16] CGPointValue]];
+    HRayNode *h3Ray=[[HRayNode alloc]initWithBoardSize:board.size name:@"h3" andPosition:[board.pawnPointsCoordinates[9] CGPointValue]];
+    
+    VRayNode *v1Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v1" andPosition:[board.pawnPointsCoordinates[15] CGPointValue]];
+    VRayNode *v2Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v2" andPosition:[board.pawnPointsCoordinates[16] CGPointValue]];
+    VRayNode *v3Ray=[[VRayNode alloc]initWithBoardSize:board.size name:@"v3" andPosition:[board.pawnPointsCoordinates[17] CGPointValue]];
+    
+    [raysDictionary setValue:h1Ray forKey:h1Ray.name];
+    [raysDictionary setValue:h2Ray forKey:h2Ray.name];
+    [raysDictionary setValue:h3Ray forKey:h3Ray.name];
+    
+    [raysDictionary setValue:v1Ray forKey:v1Ray.name];
+    [raysDictionary setValue:v2Ray forKey:v2Ray.name];
+    [raysDictionary setValue:v3Ray forKey:v3Ray.name];
+
+    return raysDictionary;
 }
 
 #pragma mark - Update

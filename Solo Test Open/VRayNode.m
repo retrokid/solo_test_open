@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        self=[self initWithTexture:[SKTexture textureWithImageNamed:@"siyahLazerH"]
+        self=[self initWithTexture:[SKTexture textureWithImageNamed:@"siyahLazerV"]
                              color:[SKColor clearColor]
                              size:CGSizeMake((boardSize.width/8)/4, boardSize.width)];
         [self setPosition:thePosition];
