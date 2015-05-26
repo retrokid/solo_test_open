@@ -10,6 +10,8 @@
 
 @implementation BoardNode
 
+@synthesize numberOfPawnPoints;
+
 - (id)initFromFrame:(CGRect)theFrame
 {
     self = [super init];
@@ -20,20 +22,10 @@
         [self setName:@"board"];
         //*********order is important!!!
         [self setPawnPointsCoordinates:theFrame];
-        [self setNumberOfPawnPoints];
-
+        [self setNumberOfPawnPoints:[[self pawnPointsCoordinates] count]];
+        [self setSize:CGSizeMake(CGRectGetWidth(theFrame), CGRectGetWidth(theFrame))];
     }
     return self;
-}
-
--(void)setNumberOfPawnPoints
-{
-    numberOfPawnPoints=[[self pawnPointsCoordinates]count];
-}
-
--(NSUInteger)numberOfPawnPoints
-{
-    return numberOfPawnPoints;
 }
 
 -(NSArray *)pawnPointsCoordinates

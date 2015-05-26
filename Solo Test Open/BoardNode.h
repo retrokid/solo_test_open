@@ -11,15 +11,16 @@
 @interface BoardNode : SKSpriteNode
 {
     NSArray *pawnPointsCoordinates;
-    NSUInteger numberOfPawnPoints;
 }
 
+@property NSUInteger numberOfPawnPoints;
+
+//init
 - (id)initFromFrame:(CGRect)theFrame;
 
 //getter setters
 -(void)setPawnPointsCoordinates:(CGRect)theFrame;
 -(NSArray *)pawnPointsCoordinates;
--(NSUInteger)numberOfPawnPoints;
--(void)setNumberOfPawnPoints;
+
 
 @end

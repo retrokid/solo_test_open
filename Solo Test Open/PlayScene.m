@@ -73,10 +73,6 @@ so, it is implemented in a private interface declaration inside of the implement
     selectedPawn=[[SKSpriteNode alloc]init];
     boardPawnPoints=[gameLogic boardPawnPoints];
 
-    /*
-    board=[gameAssets createBoardNodeFromFrame:self.frame andSize:geoCalculations.boardSize];
-    [board setName:@"board"];
-    */
     board=[[BoardNode alloc]initFromFrame:self.frame];
     
     
@@ -129,25 +125,22 @@ so, it is implemented in a private interface declaration inside of the implement
     
     boardPawnPointsCoordinates=[geoCalculations boardPawnPointsCoordinates];
     
-    for (NSInteger i=0;i<[boardPawnPointsCoordinates count];i++)
+    for (NSInteger i=0;i<[board numberOfPawnPoints];i++)
     {
-        if(!([boardPawnPointsCoordinates[i] CGPointValue].x==0 && [boardPawnPointsCoordinates[i] CGPointValue].y==0))
+        if(!([board.pawnPointsCoordinates[i] CGPointValue].x==0 &&
+             [board.pawnPointsCoordinates[i] CGPointValue].y==0))
         {
-            //SKSpriteNode *pawn=[gameAssets createPawnWithSize:[geoCalculations pawnSize]];
-            SKSpriteNode *pawn=[[PawnNode alloc]initWithBoardSize:[geoCalculations boardSize] andName:@"pawn"];
-            //[pawn setName:@"pawn"];
-            //[pawn setPosition:[boardPawnPointsCoordinates[i] CGPointValue]];
-            //[pawn setPosition:pawnStartupPosition];
+            PawnNode *pawn=[[PawnNode alloc]
+                                initWithBoardSize:board.size
+                                andName:@"pawn"];
             [pawns addObject:pawn];
             [board addChild:pawn];
-            
-            //SKSpriteNode *aPawn=[[PawnNode alloc]initWithBoardSize:[geoCalculations boardSize] andName:@"pawn"];
-            
         }
     }
     
     [self addChild:board];
     
+    //reset button
     SKLabelNode *resetButton=[[SKLabelNode alloc]init];
     [resetButton setText:@"RESET"];
     [resetButton setColor:[SKColor whiteColor]];
@@ -155,6 +148,7 @@ so, it is implemented in a private interface declaration inside of the implement
     [resetButton setName:@"reset"];
     [self addChild:resetButton];
     
+    //pawn animations
     for(NSInteger i=0,isOrigin=0;i<[boardPawnPointsCoordinates count];i++)
     {
         if(!([boardPawnPointsCoordinates[i]CGPointValue].y==0 && [boardPawnPointsCoordinates[i]CGPointValue].x==0))
@@ -191,9 +185,7 @@ so, it is implemented in a private interface declaration inside of the implement
         if([[self nodeAtPoint:[touch locationInNode:self]].name isEqualToString:@"reset"])
         {
             [self resetScene];
-            
         }
-        
     }
     TheLogger(@"🔵 CALLED");
     if(!isPawnTouched)
@@ -206,13 +198,15 @@ so, it is implemented in a private interface declaration inside of the implement
             if([[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].name isEqualToString:@"pawn"])
             {
                 TheLogger(@"pawn touch ✅ SUCCESS");
+                
                 selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
                 selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
                 selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
                 pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:boardPawnPointsCoordinates];
                 [selectedPawn setZPosition:500];
                 [selectedPawn setScale:2.0];
-                isPawnTouched=YES;
+                
+                 isPawnTouched=YES;
                 shouldLocationChange=YES;
             }
             else
@@ -243,8 +237,10 @@ so, it is implemented in a private interface declaration inside of the implement
     TheLogger(@"🔵 CALLED");
     if(isPawnTouched)
     {
+        
         [selectedPawn setZPosition:selectedPawnZPosition];
         [selectedPawn setScale:1.0];
+        
         
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
         if (dropPoint!=-1)
@@ -256,6 +252,7 @@ so, it is implemented in a private interface declaration inside of the implement
             {
                 TheLogger(@"move is possible ✅ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
+                
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
                     [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
@@ -273,14 +270,18 @@ so, it is implemented in a private interface declaration inside of the implement
                         [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
                     }
                 }];
+                
             }
             else
             {
                 TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+                
+                
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
                 }];
+                
             }
             
         }
@@ -288,9 +289,12 @@ so, it is implemented in a private interface declaration inside of the implement
         {
             TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
+            
+            
             [selectedPawn runAction:hareketEttir completion:^{
                 shouldLocationChange=NO;
             }];
+            
         }
     }
     isPawnTouched=NO;
@@ -301,8 +305,10 @@ so, it is implemented in a private interface declaration inside of the implement
     TheLogger(@"🔵 CALLED");
     if(isPawnTouched)
     {
-        [selectedPawn setZPosition:selectedPawnZPosition];
-        [selectedPawn setScale:1.0];
+        
+         [selectedPawn setZPosition:selectedPawnZPosition];
+         [selectedPawn setScale:1.0];
+
         
         dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:boardPawnPointsCoordinates];
         if (dropPoint!=-1)
@@ -314,41 +320,50 @@ so, it is implemented in a private interface declaration inside of the implement
             {
                 TheLogger(@"move is possible ✅ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:[boardPawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
-                [selectedPawn runAction:hareketEttir completion:^{
-                    shouldLocationChange=NO;
-                    [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
-                    boardPawnPoints[pickupPoint]=@NO;
-                    boardPawnPoints[removePoint]=@NO;
-                    boardPawnPoints[dropPoint]=@YES;
-                    if(![gameLogic isThereAnyMovementsLeftIn:boardPawnPoints compareWith:possibleMovements])
-                    {
-                        TheLogger(@"no more moves ✅ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
-                    }
-                    else
-                    {
-                        TheLogger(@"there are more moves ✅ SUCCESS");
-                        [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
-                    }
-                }];
+                
+                
+                 [selectedPawn runAction:hareketEttir completion:^{
+                 shouldLocationChange=NO;
+                 [self removePawnAtPosition:[boardPawnPointsCoordinates[removePoint] CGPointValue]];
+                 boardPawnPoints[pickupPoint]=@NO;
+                 boardPawnPoints[removePoint]=@NO;
+                 boardPawnPoints[dropPoint]=@YES;
+                 if(![gameLogic isThereAnyMovementsLeftIn:boardPawnPoints compareWith:possibleMovements])
+                 {
+                 TheLogger(@"no more moves ⛔️ SUCCESS");
+                 [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
+                 }
+                 else
+                 {
+                 TheLogger(@"there are more moves ✅ SUCCESS");
+                 [gameLogic numberOfRemainingPawnsIn:boardPawnPoints];
+                 }
+                 }];
+                
             }
             else
             {
-                TheLogger(@"pawn will return it's original position ✅ SUCCESS");
+                TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
-                [selectedPawn runAction:hareketEttir completion:^{
-                    shouldLocationChange=NO;
-                }];
+                
+                
+                 [selectedPawn runAction:hareketEttir completion:^{
+                 shouldLocationChange=NO;
+                 }];
+                
             }
             
         }
         else
         {
-            TheLogger(@"pawn will return it's original position ✅ SUCCESS");
+            TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
-            [selectedPawn runAction:hareketEttir completion:^{
-                shouldLocationChange=NO;
-            }];
+            
+            
+             [selectedPawn runAction:hareketEttir completion:^{
+             shouldLocationChange=NO;
+             }];
+            
         }
     }
     isPawnTouched=NO;
@@ -398,9 +413,11 @@ so, it is implemented in a private interface declaration inside of the implement
     {
         TheLogger(@"pawn is on the move ✅ SUCCESS");
         SKAction *hareketEttir=[SKAction moveTo:touchLocation duration:0.05];
+        
         [selectedPawn runAction:hareketEttir completion:^{
             shouldLocationChange=NO;
         }];
+         
     }
 }
 
