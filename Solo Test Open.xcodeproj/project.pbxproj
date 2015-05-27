@@ -18,7 +18,6 @@
 		0B5CC2E81B09E10500A0FA6C /* Solo_Test_OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CC2E71B09E10500A0FA6C /* Solo_Test_OpenTests.m */; };
 		0B6233A31B135DB8008F319A /* PawnNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6233A21B135DB8008F319A /* PawnNode.m */; };
 		0B6233A61B136C91008F319A /* BoardNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6233A51B136C91008F319A /* BoardNode.m */; };
-		0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */; };
 		0B7080011B09E80300CDB456 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7080001B09E80300CDB456 /* SpriteKit.framework */; };
 		0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7080041B09ED2C00CDB456 /* PlayScene.m */; };
 /* End PBXBuildFile section */
@@ -55,8 +54,6 @@
 		0B6233A21B135DB8008F319A /* PawnNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PawnNode.m; sourceTree = "<group>"; };
 		0B6233A41B136C91008F319A /* BoardNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardNode.h; sourceTree = "<group>"; };
 		0B6233A51B136C91008F319A /* BoardNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardNode.m; sourceTree = "<group>"; };
-		0B6DBF1F1B0C7B6500237CD5 /* GeoCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoCalc.h; sourceTree = "<group>"; };
-		0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoCalc.m; sourceTree = "<group>"; };
 		0B7080001B09E80300CDB456 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		0B7080031B09ED2C00CDB456 /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayScene.h; sourceTree = "<group>"; };
 		0B7080041B09ED2C00CDB456 /* PlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayScene.m; sourceTree = "<group>"; };
@@ -109,12 +106,6 @@
 				0B5CC2D31B09E10500A0FA6C /* ViewController.m */,
 				0B7080031B09ED2C00CDB456 /* PlayScene.h */,
 				0B7080041B09ED2C00CDB456 /* PlayScene.m */,
-				0B5CC2D51B09E10500A0FA6C /* Main.storyboard */,
-				0B5CC2D81B09E10500A0FA6C /* Images.xcassets */,
-				0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */,
-				0B5CC2CB1B09E10500A0FA6C /* Supporting Files */,
-				0B6DBF1F1B0C7B6500237CD5 /* GeoCalc.h */,
-				0B6DBF201B0C7B6500237CD5 /* GeoCalc.m */,
 				0B6233A11B135DB8008F319A /* PawnNode.h */,
 				0B6233A21B135DB8008F319A /* PawnNode.m */,
 				0B6233A41B136C91008F319A /* BoardNode.h */,
@@ -123,6 +114,10 @@
 				0B3CCF3E1B1471B7009C7AEC /* VRayNode.m */,
 				0B3CCF401B1471D3009C7AEC /* HRayNode.h */,
 				0B3CCF411B1471D3009C7AEC /* HRayNode.m */,
+				0B5CC2D81B09E10500A0FA6C /* Images.xcassets */,
+				0B5CC2D51B09E10500A0FA6C /* Main.storyboard */,
+				0B5CC2DA1B09E10500A0FA6C /* LaunchScreen.xib */,
+				0B5CC2CB1B09E10500A0FA6C /* Supporting Files */,
 			);
 			path = "Solo Test Open";
 			sourceTree = "<group>";
@@ -263,7 +258,6 @@
 			files = (
 				0B5CC2D41B09E10500A0FA6C /* ViewController.m in Sources */,
 				0B5CC2D11B09E10500A0FA6C /* AppDelegate.m in Sources */,
-				0B6DBF211B0C7B6500237CD5 /* GeoCalc.m in Sources */,
 				0B6233A31B135DB8008F319A /* PawnNode.m in Sources */,
 				0B6233A61B136C91008F319A /* BoardNode.m in Sources */,
 				0B7080051B09ED2C00CDB456 /* PlayScene.m in Sources */,

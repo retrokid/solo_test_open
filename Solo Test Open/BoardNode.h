@@ -33,5 +33,7 @@
 -(BOOL)isThereAnyMovementsLeft;
 -(BOOL)isThisMovePossibleFromPointOf:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint;
 -(NSInteger)findRemovePointOfPawn:(NSInteger)theSelectedPawn to:(NSInteger)theDropPoint;
+-(NSInteger)findDropPointOfSelectedPawnWithLocation:(CGPoint)lastPositionWhenTouchEnded andPawnSize:(CGSize)thePawnSize;
+-(NSInteger)findPickupPointOfSelectedPawnWithSelectedPawnLastPosition:(CGPoint)selectedPawnPosition;
 
 @end

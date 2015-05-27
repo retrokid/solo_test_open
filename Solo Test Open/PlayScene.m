@@ -45,7 +45,6 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)didMoveToView:(SKView *)view
 {
-    TheLogger(@"🔵 CALLED");
     if(!self.contentCreated)
     {
         [self createSceneContents];
@@ -55,10 +54,7 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)createSceneContents
 {
-    TheLogger(@"🔵 CALLED");
     pawns=[[NSMutableArray alloc]init];
-    //gameLogic=[[GameLogic alloc]init];
-    geoCalculations=[[GeoCalc alloc]initWithSceneFrame:self.frame];
     
     self.backgroundColor=[SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
@@ -152,44 +148,31 @@ so, it is implemented in a private interface declaration inside of the implement
             [self resetScene];
         }
     }
-    TheLogger(@"🔵 CALLED");
     if(!isPawnTouched)
     {
-        TheLogger(@"no pawn touched yet ✅ SUCCESS");
         for (UITouch *touch in touches)
         {
             touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
             
             if([[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].name isEqualToString:@"pawn"])
             {
-                TheLogger(@"pawn touch ✅ SUCCESS");
-                
                 selectedPawn=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation];
                 selectedPawnZPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].zPosition;
                 selectedPawnLastPosition=[[self childNodeWithName:@"board"]nodeAtPoint:touchLocation].position;
-                pickupPoint=[geoCalculations findPickupPointOfSelectedPawn:selectedPawnLastPosition inCoordinates:board.pawnPointsCoordinates];
+
+                pickupPoint=[board findPickupPointOfSelectedPawnWithSelectedPawnLastPosition:selectedPawnLastPosition];
                 [selectedPawn setZPosition:500];
                 [selectedPawn setScale:2.0];
                 
                  isPawnTouched=YES;
                 shouldLocationChange=YES;
             }
-            else
-            {
-                TheLogger(@"pawn touch ⛔️ FAIL");
-            }
         }
     }
-    else
-    {
-        TheLogger(@"a pawn is already touched ⛔️ FAIL");
-    }
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    TheLogger(@"🔵 CALLED");
     for (UITouch *touch in touches)
     {
         touchLocation = [touch locationInNode:[self childNodeWithName:@"board"]];
@@ -199,23 +182,18 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    TheLogger(@"🔵 CALLED");
     if(isPawnTouched)
     {
         
         [selectedPawn setZPosition:selectedPawnZPosition];
         [selectedPawn setScale:1.0];
         
-        
-        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:board.pawnPointsCoordinates];
+        dropPoint=[board findDropPointOfSelectedPawnWithLocation:selectedPawn.position andPawnSize:[(SKSpriteNode *)selectedPawn size]];
         if (dropPoint!=-1)
         {
-            TheLogger(@"pawn point is empty ✅ SUCCESS");
-            //removePoint=[gameLogic findRemovePointOfPawn:pickupPoint to:dropPoint inThe:board.possibleMovements coordinates:board.currentPawnPoints];
             removePoint=[board findRemovePointOfPawn:pickupPoint to:dropPoint];
             if (dropPoint!=-1 && ![board.currentPawnPoints[dropPoint] boolValue] && removePoint!=-1)
             {
-                TheLogger(@"move is possible ✅ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:[board.pawnPointsCoordinates[dropPoint] CGPointValue] duration:0.1];
                 
                 [selectedPawn runAction:hareketEttir completion:^{
@@ -237,10 +215,7 @@ so, it is implemented in a private interface declaration inside of the implement
             }
             else
             {
-                TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
-                
-                
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
                 }];
@@ -250,7 +225,6 @@ so, it is implemented in a private interface declaration inside of the implement
         }
         else
         {
-            TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
             
             
@@ -270,8 +244,7 @@ so, it is implemented in a private interface declaration inside of the implement
         [selectedPawn setZPosition:selectedPawnZPosition];
         [selectedPawn setScale:1.0];
         
-        
-        dropPoint=[geoCalculations findDropPointOfSelectedPawn:selectedPawn.position inCoordinates:board.pawnPointsCoordinates];
+        dropPoint=[board findDropPointOfSelectedPawnWithLocation:selectedPawn.position andPawnSize:[pawns[0] size]];
         if (dropPoint!=-1)
         {
             removePoint=[board findRemovePointOfPawn:pickupPoint to:dropPoint];
@@ -298,7 +271,6 @@ so, it is implemented in a private interface declaration inside of the implement
             }
             else
             {
-                TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
                 SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
                 [selectedPawn runAction:hareketEttir completion:^{
                     shouldLocationChange=NO;
@@ -309,7 +281,6 @@ so, it is implemented in a private interface declaration inside of the implement
         }
         else
         {
-            TheLogger(@"pawn will return it's original position ⛔️ SUCCESS");
             SKAction *hareketEttir=[SKAction moveTo:selectedPawnLastPosition duration:0.1];
             [selectedPawn runAction:hareketEttir completion:^{
                 shouldLocationChange=NO;
@@ -380,7 +351,6 @@ so, it is implemented in a private interface declaration inside of the implement
 {
     if(shouldLocationChange&&isPawnTouched)
     {
-        TheLogger(@"pawn is on the move ✅ SUCCESS");
         SKAction *hareketEttir=[SKAction moveTo:touchLocation duration:0.05];
         
         [selectedPawn runAction:hareketEttir completion:^{

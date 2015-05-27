@@ -30,6 +30,32 @@
     return self;
 }
 
+//returns boardPawnPointsCoordinates[index]'s index or -1 if it fails
+-(NSInteger)findPickupPointOfSelectedPawnWithSelectedPawnLastPosition:(CGPoint)selectedPawnPosition
+{
+    for(NSInteger i=0;i<[self.pawnPointsCoordinates count];i++)
+    {
+        if([self.pawnPointsCoordinates[i] CGPointValue].x==selectedPawnPosition.x && [self.pawnPointsCoordinates[i] CGPointValue].y==selectedPawnPosition.y)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+//returns boardPawnPointsCoordinates[index]'s index if it can be drop to that point.Returns -1 if it can't be drop
+-(NSInteger)findDropPointOfSelectedPawnWithLocation:(CGPoint)lastPositionWhenTouchEnded andPawnSize:(CGSize)thePawnSize
+{
+    for(NSInteger i=0;i<[self.pawnPointsCoordinates count];i++)
+    {
+        if(CGRectIntersectsRect(CGRectMake(lastPositionWhenTouchEnded.x+(thePawnSize.width/2), lastPositionWhenTouchEnded.y+(thePawnSize.height/2), thePawnSize.width, thePawnSize.height),CGRectStandardize(CGRectMake([self.pawnPointsCoordinates[i] CGPointValue].x-thePawnSize.width, [self.pawnPointsCoordinates[i] CGPointValue].y-thePawnSize.height, thePawnSize.width*2, thePawnSize.height*2))))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 -(BOOL)isThereAnyMovementsLeft
 {
     for(NSInteger i=0;i<[self.possibleMovements count];i++)

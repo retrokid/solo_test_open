@@ -25,8 +25,6 @@
  */
 #import <SpriteKit/SpriteKit.h>
 
-#import "GeoCalc.h"
-
 #import "PawnNode.h"
 #import "BoardNode.h"
 #import "VRayNode.h"
@@ -50,8 +48,6 @@
 
     BoardNode *board;
     NSMutableDictionary *rays;
-    
-    GeoCalc *geoCalculations;
     
     NSMutableArray *pawns;
 }
