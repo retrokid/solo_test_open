@@ -36,10 +36,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    /*
     SKView *spriteView=(SKView *)self.view;
     spriteView.showsDrawCount=YES;
     spriteView.showsNodeCount=YES;
     spriteView.showsFPS=YES;
+     */
 }
 
 -(void)viewWillAppear:(BOOL)animated

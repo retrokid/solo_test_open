@@ -216,14 +216,12 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[dropPoint]=@YES;
                     if(![board isThereAnyMovementsLeft])
                     {
-                        TheLogger(@"no more moves ⛔️ SUCCESS");
                         [scoreLabel setText:[NSString stringWithFormat:@"Pawn Left:%d",[board numberOfRemainingPawnsOnBoard]]];
                         [alertLabel setText:@"No More Moves!"];
                     }
                     else
                     {
                         [scoreLabel setText:[NSString stringWithFormat:@"Pawn Left:%d",[board numberOfRemainingPawnsOnBoard]]];
-                        TheLogger(@"there are more moves ✅ SUCCESS");
                     }
                 }];
                 
@@ -276,14 +274,12 @@ so, it is implemented in a private interface declaration inside of the implement
                     board.currentPawnPoints[dropPoint]=@YES;
                     if(![board isThereAnyMovementsLeft])
                     {
-                        TheLogger(@"no more moves ⛔️ SUCCESS");
                         [scoreLabel setText:[NSString stringWithFormat:@"Pawn Left:%d",[board numberOfRemainingPawnsOnBoard]]];
                         [alertLabel setText:@"No More Moves!"];
                     }
                     else
                     {
                         [scoreLabel setText:[NSString stringWithFormat:@"Pawn Left:%d",[board numberOfRemainingPawnsOnBoard]]];
-                        TheLogger(@"there are more moves ✅ SUCCESS");
                     }
                 }];
                 
