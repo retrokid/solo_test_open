@@ -46,6 +46,8 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)didMoveToView:(SKView *)view
 {
+    //background music
+    //[self runAction:[SKAction repeatActionForever:[SKAction playSoundFileNamed:@"bg-music" waitForCompletion:NO]]];
     if(!self.contentCreated)
     {
         [self createSceneContents];
@@ -102,7 +104,7 @@ so, it is implemented in a private interface declaration inside of the implement
     
     [self addChild:board];
     
-    //reset button
+    //reset button and labels
     SKLabelNode *resetButton=[[SKLabelNode alloc]init];
     [resetButton setText:@"RESET"];
     [resetButton setColor:[SKColor whiteColor]];
@@ -121,7 +123,12 @@ so, it is implemented in a private interface declaration inside of the implement
     [alertLabel setPosition:CGPointMake(CGRectGetMidX([self frame]),CGRectGetMinY([self frame])+alertLabel.frame.size.height)];
     [self addChild:alertLabel];
     
-    //pawn animations
+    //animations
+    //startup animation sound
+    //[self runAction:[SKAction playSoundFileNamed:@"" waitForCompletion:NO]];
+    
+    
+    
     for(NSInteger i=0,isOrigin=0;i<[board.pawnPointsCoordinates count];i++)
     {
         if(!([board.pawnPointsCoordinates[i]CGPointValue].y==0 && [board.pawnPointsCoordinates[i]CGPointValue].x==0))
@@ -312,6 +319,8 @@ so, it is implemented in a private interface declaration inside of the implement
 
 -(void)removePawnAtPosition:(CGPoint)position
 {
+    //sound will add
+    //SKAction *shrinkPawnSound=[SKAction playSoundFileNamed:@"shrink-sound" waitForCompletion:NO];
     SKAction *shrinkPawn=[SKAction resizeToWidth:0 height:0 duration:0.2];
     SKAction *removePawn=[SKAction removeFromParent];
     [SKAction sequence:@[shrinkPawn,removePawn]];
