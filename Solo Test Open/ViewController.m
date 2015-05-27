@@ -24,14 +24,8 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//TheLogger() marks
-//positive ✅ TheLogger(@"✅ SUCCESS");
-//negative ⛔️ TheLogger(@"⛔️ FAIL");
-//routine info 🔵 TheLogger(@"🔵 CALLED");
-//value info ⚪️ TheLogger(@"⚪️ output=%f",var);
-
 #import "ViewController.h"
-#define TheLogger(s, ...) NSLog(@"<%@> -%@ Line:%d | %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], NSStringFromSelector(_cmd), __LINE__,[NSString stringWithFormat:(s), ##__VA_ARGS__])
+
 @interface ViewController ()
 
 @end
@@ -40,7 +34,6 @@
 
 - (void)viewDidLoad
 {
-    TheLogger(@"🔵 CALLED");
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     SKView *spriteView=(SKView *)self.view;
@@ -51,14 +44,12 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    TheLogger(@"🔵 CALLED");
     PlayScene *playSC=[[PlayScene alloc]initWithSize:self.view.frame.size];
     SKView *spriteView=(SKView *)self.view;
     [spriteView presentScene:playSC];
 }
 
 - (void)didReceiveMemoryWarning {
-    TheLogger(@"🔵 CALLED");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

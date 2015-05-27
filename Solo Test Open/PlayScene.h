@@ -35,6 +35,7 @@
     BOOL isPawnTouched;
     BOOL isThisMovePossible;
     BOOL shouldLocationChange;
+    BOOL startupActionsAnimating;
     
     CGPoint touchLocation;
     
@@ -48,8 +49,10 @@
 
     BoardNode *board;
     NSMutableDictionary *rays;
-    
     NSMutableArray *pawns;
+    
+    SKLabelNode *alertLabel;
+    SKLabelNode *scoreLabel;
 }
 
 -(void)createSceneContents;
