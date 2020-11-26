@@ -54,22 +54,22 @@ so, it is implemented in a private interface declaration inside of the implement
     pawns=[[NSMutableArray alloc]init];
     rays=[[NSMutableDictionary alloc]init];
     
-    rays=[self createRays];
-    
-    [[rays objectForKey:@"h1"] setPosition:[[rays objectForKey:@"h1"]startupPosition]];
-    [[rays objectForKey:@"h2"] setPosition:[[rays objectForKey:@"h2"]startupPosition]];
-    [[rays objectForKey:@"h3"] setPosition:[[rays objectForKey:@"h3"]startupPosition]];
-    
-    [[rays objectForKey:@"v1"] setPosition:[[rays objectForKey:@"v1"]startupPosition]];
-    [[rays objectForKey:@"v2"] setPosition:[[rays objectForKey:@"v2"]startupPosition]];
-    [[rays objectForKey:@"v3"] setPosition:[[rays objectForKey:@"v3"]startupPosition]];
-    
-    [board addChild:[rays objectForKey:@"h1"]];
-    [board addChild:[rays objectForKey:@"h2"]];
-    [board addChild:[rays objectForKey:@"h3"]];
-    [board addChild:[rays objectForKey:@"v1"]];
-    [board addChild:[rays objectForKey:@"v2"]];
-    [board addChild:[rays objectForKey:@"v3"]];
+//    rays=[self createRays];
+//    
+//    [[rays objectForKey:@"h1"] setPosition:[[rays objectForKey:@"h1"]startupPosition]];
+//    [[rays objectForKey:@"h2"] setPosition:[[rays objectForKey:@"h2"]startupPosition]];
+//    [[rays objectForKey:@"h3"] setPosition:[[rays objectForKey:@"h3"]startupPosition]];
+//    
+//    [[rays objectForKey:@"v1"] setPosition:[[rays objectForKey:@"v1"]startupPosition]];
+//    [[rays objectForKey:@"v2"] setPosition:[[rays objectForKey:@"v2"]startupPosition]];
+//    [[rays objectForKey:@"v3"] setPosition:[[rays objectForKey:@"v3"]startupPosition]];
+//    
+//    [board addChild:[rays objectForKey:@"h1"]];
+//    [board addChild:[rays objectForKey:@"h2"]];
+//    [board addChild:[rays objectForKey:@"h3"]];
+//    [board addChild:[rays objectForKey:@"v1"]];
+//    [board addChild:[rays objectForKey:@"v2"]];
+//    [board addChild:[rays objectForKey:@"v3"]];
     
     for (NSInteger i=0;i<[board numberOfPawnPoints];i++)
     {
