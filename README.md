@@ -6,7 +6,7 @@ It's working but there are some bugs.
 
 I can't believe this is still working after 7 years!
 
-objective-c power i guess.
+power of objective-c i guess.
 
 # License
 
