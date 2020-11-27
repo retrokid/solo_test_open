@@ -1,4 +1,4 @@
-# Solo-Test-Open
+# Solo Test
 
 A SpriteKit Game Prototype
 iOS 8.2
