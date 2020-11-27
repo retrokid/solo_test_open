@@ -4,7 +4,7 @@ A SpriteKit Game Prototype
 iOS 8.2
 It's working but there are some bugs.
 
-I can't believe this is still working after 7 years!
+I can't believe this is still working after 6 years!
 
 power of objective-c i guess.
 
