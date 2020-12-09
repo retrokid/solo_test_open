@@ -1,9 +1,8 @@
-Created by efe ertugrul.
+## Copyright © 2015 Efe Ertugrul
 
-Copyright (c) 2015 efe ertugrul. 
-
+```
+Created by Efe Ertugrul.
 All rights reserved.
-
-You can download, run, compile, change the code for your own use.
-
+You can download, run, compile, change the code.
 Do not redistribute in any form.
+```
